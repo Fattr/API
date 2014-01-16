@@ -1,0 +1,36 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "fittr api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hendrixer/api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hendrixer/api/issues"
+  },
+  "homepage": "https://github.com/Hendrixer/api",
+  "dependencies": {
+    "express": "~3.4.8",
+    "passport": "~0.1.18",
+    "passport-facebook": "~1.0.2",
+    "fitbit-js": "~0.2.0",
+    "mongoose": "~3.8.4",
+    "grunt": "~0.4.2"
+  },
+  "devDependencies": {
+    "grunt-contrib-jasmine": "~0.5.2",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-coffee": "~0.8.0",
+    "frisby": "~0.7.5",
+    "jasmine-node": "~1.12.0"
+  }
+}
