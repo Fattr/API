@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     coffee : {
       compile : {
         files: {
-          // FIXEME: Change paths here!!!!!
+          // FIXEME: Change paths here!!!!!!
           'src/test.js': 'src/test.coffee'
         }
       }
