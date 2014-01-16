@@ -11,11 +11,15 @@ module.exports = function(grunt) {
     },
 
     coffee : {
-      compile : {
-        files: {
-          // FIXEME: Change paths here!!!!!!
-          'src/test.js': 'src/test.coffee'
-        }
+      glob_to_multiple: {
+        options: {
+          sourceMap: true
+        },
+        expand: true,
+        cwd: 'src',
+        src: ['**/*.coffee'],
+        dest: 'compiled',
+        ext: '.js'
       }
     },
   });
