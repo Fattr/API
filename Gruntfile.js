@@ -37,5 +37,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-coffeelint');
 
-  grunt.registerTask('coffee', 'watch');
+  grunt.registerTask('compileAndWatch', ['coffeelint','coffee','watch']);
 };
