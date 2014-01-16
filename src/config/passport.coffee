@@ -1,7 +1,7 @@
 # passport auth stuff here
 'use strict'
 
-facebookStrategy = require 'passport-facebok'
+FacebookStrategy = require('passport-facebook').Strategy
 authTokens = require './auth.coffee'
 User = require '../models/user.coffee'
 
@@ -30,12 +30,12 @@ module.exports = (passport) ->
   # Facebook
   # ===========================
 
-  passport.use new facebookStrategy(
+  passport.use new FacebookStrategy(
     # use our facebook app tokens to do oauth handshake
 
     clientID: authTokens.facebook.clientID
     clientSecret: authTokens.facebook.clientSecret
-    callbackUrl: authTokens.facebook.callbackUrl,
+    callbackURL: authTokens.facebook.callbackUrl,
 
     # below is the tokens facebook belonging to the
     # user. We must save these on our DB
@@ -45,6 +45,7 @@ module.exports = (passport) ->
 
         # chek to see if we already have a user with the
         # same facebook id
+        console.log 'refreshToken', refreshToken
 
         User.findOne('facebook.id': profile.id, (err, user) ->
           done err if err
@@ -56,7 +57,9 @@ module.exports = (passport) ->
           else
             console.log 'new user'
             newUser = new User()
-            newUser.name = profile.name
+            newUser.facebook.id = profile.id
+            newUser.name = profile.displayName
+            newUser.username = profile.username
             # FIXME
             # Set the rest of the facebook profile
             # Fields here ex: the tokens!!!!
@@ -65,6 +68,8 @@ module.exports = (passport) ->
               if err
                 console.log 'err svaing new user', err
                 return err
-              done null, newUser
+              else
+                console.log newUser
+                done null, newUser
         )
   )

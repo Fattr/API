@@ -10,12 +10,13 @@ module.exports = function(grunt) {
       }
     },
 
-    coffee : {
+    coffee: {
       glob_to_multiple: {
         options: {
           sourceMap: true
         },
         expand: true,
+        flatten: false,
         cwd: 'src',
         src: ['**/*.coffee'],
         dest: 'compiled',
@@ -28,7 +29,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['src/**/*.coffee'],
-      tasks: ['coffeelint', 'coffee']
+      tasks: ['coffeelint','coffee']
     }
   });
 
@@ -37,5 +38,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-coffeelint');
 
-  grunt.registerTask('compileAndWatch', ['coffeelint','coffee','watch']);
+  // deafult tasks lints and compiles coffe
+  // use grunt command no options
+
+  grunt.registerTask('default', 'watch');
 };
