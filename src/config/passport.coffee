@@ -45,7 +45,7 @@ module.exports = (passport) ->
 
         # chek to see if we already have a user with the
         # same facebook id
-        console.log 'facebook profile', profile
+        console.log 'refreshToken', refreshToken
 
         User.findOne('facebook.id': profile.id, (err, user) ->
           done err if err
