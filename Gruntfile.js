@@ -19,6 +19,7 @@ module.exports = function(grunt) {
       }
     },
   });
+  grunt.task.registerTask('coffee', ['coffee']);
 
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-coffee');

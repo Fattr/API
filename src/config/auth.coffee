@@ -1,0 +1,1 @@
+# auth config here our app credits
