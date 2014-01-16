@@ -1,16 +1,22 @@
+'use strict'
+
 mongoose = require 'mongoose'
 
-UserSchema = new mongoose.Schema({
+UserSchema = new mongoose.Schema(
   name: String
-  username: {
+  username:
     type: String
     unique: true
-  }
-  email: {
+
+  email:
     type: String
     unique: true
-  }
-  profile_picture: String
-  })
+
+  facebook:
+    id: String
+    avatar: String
+    accesstoken: String
+    refreshToken: String
+)
 
 module.exports = mongoose.model 'User', UserSchema

@@ -22,9 +22,20 @@ module.exports = function(grunt) {
         ext: '.js'
       }
     },
-  });
-  grunt.task.registerTask('coffee', ['coffee']);
 
+    coffeelint: {
+      app: 'src/**/*.coffee'
+    },
+    watch: {
+      files: ['src/**/*.coffee'],
+      tasks: ['coffeelint', 'coffee']
+    }
+  });
+
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-coffeelint');
+
+  grunt.registerTask('coffee', 'watch');
 };
