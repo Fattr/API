@@ -3,8 +3,10 @@
 mongoose = require 'mongoose'
 
 UserSchema = new mongoose.Schema(
-  name: String
-  username:
+  
+  fullName: String
+  
+  _id: # username
     type: String
     unique: true
 
@@ -17,6 +19,11 @@ UserSchema = new mongoose.Schema(
     avatar: String
     accesstoken: String
     refreshToken: String
+
+  services:[{
+    type: Schema.ObjectId
+    ref: 'Service'
+  }]
 )
 
 module.exports = mongoose.model 'User', UserSchema
