@@ -4,10 +4,10 @@ mongoose = require 'mongoose'
 
 StatSchema = new mongoose.Schema(
   user:
-    type: Schema.ObjectId
+    type: mongoose.Schema.ObjectId
     ref: 'User'
   collectedFrom:
-    type: Schema.ObjectId
+    type: mongoose.Schema.ObjectId
     ref: 'Service'
   date:
     type: Date
