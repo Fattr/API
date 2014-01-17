@@ -13,6 +13,34 @@ module.exports = function(grunt) {
       }
     },
 
+
+
+    coffee: {
+      glob_to_multiple: {
+        options: {
+          sourceMap: true
+        },
+        expand: true,
+        flatten: false,
+        cwd: 'src',
+        src: ['**/*.coffee'],
+        dest: 'compiled',
+        ext: '.js'
+      }
+    },
+
+    express: {
+      options: {
+
+      },
+      dev: {
+        options: {
+          script: 'server.coffee'
+        }
+      }
+    },
+
+
     coffeelint: {
       app: 'src/**/*.coffee'
     },
@@ -22,12 +50,6 @@ module.exports = function(grunt) {
     },
 
     shell: {
-      server: {
-        options: {
-          stdout: true
-        },
-        command: 'nodemon server.coffee'
-      },
       test: {
         options: {
           stdout: true
@@ -46,6 +68,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-coffeelint');
+  grunt.loadNpmTasks('grunt-express');
   grunt.loadNpmTasks('grunt-shell');
 
 
@@ -53,7 +76,9 @@ module.exports = function(grunt) {
   // use grunt command no options
 
   grunt.registerTask('default', 'watch');
-  grunt.registerTask('serve', 'shell:server');
   grunt.registerTask('test', 'shell:test');
   grunt.registerTask('coffee', ['coffeelint','shell:coffeecompile']);
+  grunt.registerTask('serve', ['express:dev','test']);
+  grunt.registerTask('travis', 'coffeelint', 'coffee');
+
 };
