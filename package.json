@@ -25,14 +25,12 @@
     "grunt": "~0.4.2",
     "passport-local": "~0.1.6",
     "bcrypt-nodejs": "0.0.3",
-    "connect-flash": "~0.1.1"
   },
   "devDependencies": {
     "grunt-contrib-jasmine": "~0.5.2",
     "grunt-contrib-jshint": "~0.6.3",
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-coffee": "~0.8.0",
     "frisby": "~0.7.5",
     "jasmine-node": "~1.12.0",
     "grunt-coffeelint": "0.0.8",
