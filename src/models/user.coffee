@@ -3,9 +3,9 @@
 mongoose = require 'mongoose'
 
 UserSchema = new mongoose.Schema(
-  
+
   fullName: String
-  
+
   _id: # username
     type: String
     unique: true
@@ -21,7 +21,7 @@ UserSchema = new mongoose.Schema(
     refreshToken: String
 
   services:[{
-    type: Schema.ObjectId
+    type: mongoose.Schema.ObjectId
     ref: 'Service'
   }]
 )
