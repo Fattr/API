@@ -1,4 +1,4 @@
-var path = require('path');
+
 module.exports = function(grunt) {
   'use strict';
   // Project configuration.
@@ -12,48 +12,68 @@ module.exports = function(grunt) {
         specs : 'test/**/*.js'
       }
     },
+    express: {
+      options: {
+
+      },
+      dev: {
+        options: {
+          cmd: 'coffee',
+          script: 'server.coffee'
+        }
+      }
+    },
 
     coffeelint: {
       app: 'src/**/*.coffee'
     },
+
+    coffee: {
+      glob_to_multiple: {
+        options: {
+          sourceMap: true,
+          sourceMapDir: 'src/compiled/'
+        },
+
+        expand: true,
+        flatten: true,
+        cwd: 'src/',
+        src: ['*/**/*.coffee'],
+        dest: 'src/compiled',
+        ext: '.js'
+      }
+    },
+
     watch: {
       files: ['src/**/*.coffee'],
-      tasks: ['coffeelint','coffee']
+      tasks: ['coffeelint','shell:coffeecompile']
     },
 
     shell: {
-      server: {
-        options: {
-          stdout: true
-        },
-        command: 'nodemon server.coffee'
-      },
       test: {
         options: {
           stdout: true
         },
         command: 'jasmine-node --coffee test/api_spec.coffee'
       },
-      coffeecompile: {
-        options: {
-          stdout: true
-        },
-        command: 'coffee --output compiled --map --watch --compile .'
-      }
     },
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-coffeelint');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-shell');
 
 
   // deafult tasks lints and compiles coffe
   // use grunt command no options
 
+  grunt.registerTask('build', ['coffeelint', 'coffee']);
   grunt.registerTask('default', 'watch');
-  grunt.registerTask('serve', 'shell:server');
   grunt.registerTask('test', 'shell:test');
-  grunt.registerTask('coffee', ['coffeelint','shell:coffeecompile']);
+  grunt.registerTask('serve', ['express:dev','test']);
+  grunt.registerTask('travis', ['build','serve']);
+
 };

@@ -7,3 +7,5 @@ frisby.create('GET hello world').get(URL).expectStatus(200).expectJSONTypes(
 ).expectJSON(
   test: 'hello world'
 ).toss()
+
+frisby.create('Check auth').get("#{URL}/facebook").expectStatus(200).toss()
