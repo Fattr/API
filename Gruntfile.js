@@ -52,7 +52,6 @@ module.exports = function(grunt) {
     shell: {
       test: {
         options: {
-          stdout: true
         },
         command: 'jasmine-node --coffee test/api_spec.coffee'
       },
