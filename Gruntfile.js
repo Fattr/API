@@ -33,14 +33,8 @@ module.exports = function(grunt) {
           stdout: true
         },
         command: 'jasmine-node --coffee test/api_spec.coffee'
-      },
-      coffeecompile: {
-        options: {
-          stdout: true
-        },
-        command: 'coffee --output compiled --map --watch --compile .'
       }
-    },
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
