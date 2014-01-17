@@ -24,22 +24,6 @@ module.exports = function(grunt) {
       }
     },
 
-
-
-    coffee: {
-      glob_to_multiple: {
-        options: {
-          sourceMap: true
-        },
-        expand: true,
-        flatten: false,
-        cwd: 'src',
-        src: ['**/*.coffee'],
-        dest: 'compiled',
-        ext: '.js'
-      }
-    },
-
     coffeelint: {
       app: 'src/**/*.coffee'
     },
