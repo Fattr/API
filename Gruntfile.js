@@ -70,6 +70,6 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'watch');
   //grunt.registerTask('test', 'shell:test');
   grunt.registerTask('serve', ['express:dev','test']);
-  grunt.registerTask('travis', ['build']);
+  grunt.registerTask('travis', 'build');
 
 };
