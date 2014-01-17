@@ -1,4 +1,3 @@
-
 module.exports = function(grunt) {
   'use strict';
   // Project configuration.
@@ -46,12 +45,13 @@ module.exports = function(grunt) {
 
     watch: {
       files: ['src/**/*.coffee'],
-      tasks: ['coffeelint','shell:coffeecompile']
+      tasks: ['coffeelint','coffee']
     },
 
     shell: {
       test: {
         options: {
+          stdout: true
         },
         command: 'jasmine-node --coffee test/api_spec.coffee'
       }
