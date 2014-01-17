@@ -10,4 +10,5 @@ module.exports =
     res.json 'test': 'hello world'
 
   test: (req, res) ->
+    console.log 'test user', req.user
     res.json(req.user)
