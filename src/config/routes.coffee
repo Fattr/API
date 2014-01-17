@@ -8,11 +8,12 @@ module.exports = (app, passport) ->
 
   # Facebook auth here
   app.get '/facebook', passport.authenticate 'facebook', (req, res) ->
+    console.log 'auth user', req.user
     res.send req.user
 
   # Facebook auth callback
   # FIXME:!!!!!!!
   # Add real callback url for front
   app.get '/auth/facebook/callback', passport.authenticate 'facebook',
-  successRedirect: 'https://www.google.com'
+  successRedirect: 'http://127.0.0.1:3000'
   failureRedirect: 'https://www.yahoo.com'
