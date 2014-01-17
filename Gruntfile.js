@@ -43,6 +43,7 @@ module.exports = function(grunt) {
         ext: '.js'
       }
     },
+
     watch: {
       files: ['src/**/*.coffee'],
       tasks: ['coffeelint','shell:coffeecompile']
@@ -74,4 +75,5 @@ module.exports = function(grunt) {
   grunt.registerTask('test', 'shell:test');
   grunt.registerTask('serve', ['express:dev','test']);
   grunt.registerTask('travis', ['build','serve']);
+
 };
