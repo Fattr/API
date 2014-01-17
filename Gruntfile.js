@@ -1,4 +1,3 @@
-
 module.exports = function(grunt) {
   'use strict';
   // Project configuration.
@@ -46,6 +45,7 @@ module.exports = function(grunt) {
       tasks: ['coffeelint','coffee']
     },
 
+
     // shell: {
     //   test: {
     //     options: {
@@ -54,6 +54,15 @@ module.exports = function(grunt) {
     //     command: 'jasmine-node --coffee test/api_spec.coffee'
     //   }
     // }
+
+    shell: {
+      test: {
+        options: {
+          stdout: true
+        },
+        command: 'jasmine-node --coffee test/api_spec.coffee'
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
