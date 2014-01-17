@@ -18,6 +18,7 @@ module.exports = function(grunt) {
       },
       dev: {
         options: {
+          cmd: 'coffee',
           script: 'server.coffee'
         }
       }
@@ -44,7 +45,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: ['src/**/*.coffee'],
-      tasks: ['coffeelint','coffee']
+      tasks: ['coffeelint','shell:coffeecompile']
     },
 
     shell: {
@@ -66,16 +67,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-coffeelint');
-  grunt.loadNpmTasks('grunt-express');
+  grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-shell');
 
 
   // deafult tasks lints and compiles coffe
   // use grunt command no options
 
+  grunt.registerTask('build', ['coffeelint', 'coffee']);
   grunt.registerTask('default', 'watch');
   grunt.registerTask('test', 'shell:test');
   grunt.registerTask('serve', ['express:dev','test']);
-  grunt.registerTask('travis', ['coffee', 'serve']);
-
+  grunt.registerTask('travis', ['build','serve']);
 };
