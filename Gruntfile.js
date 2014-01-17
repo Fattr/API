@@ -12,6 +12,16 @@ module.exports = function(grunt) {
         specs : 'test/**/*.js'
       }
     },
+    express: {
+      options: {
+
+      },
+      dev: {
+        options: {
+          script: 'server.coffee'
+        }
+      }
+    },
 
 
 
@@ -28,18 +38,6 @@ module.exports = function(grunt) {
         ext: '.js'
       }
     },
-
-    express: {
-      options: {
-
-      },
-      dev: {
-        options: {
-          script: 'server.coffee'
-        }
-      }
-    },
-
 
     coffeelint: {
       app: 'src/**/*.coffee'
@@ -77,8 +75,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', 'watch');
   grunt.registerTask('test', 'shell:test');
-  grunt.registerTask('coffee', ['coffeelint','shell:coffeecompile']);
   grunt.registerTask('serve', ['express:dev','test']);
-  grunt.registerTask('travis', 'coffeelint', 'coffee');
+  grunt.registerTask('travis', ['coffee', 'serve']);
 
 };
