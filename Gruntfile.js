@@ -13,9 +13,6 @@ module.exports = function(grunt) {
       }
     },
     express: {
-      options: {
-
-      },
       dev: {
         options: {
           cmd: 'coffee',
@@ -49,14 +46,14 @@ module.exports = function(grunt) {
       tasks: ['coffeelint','coffee']
     },
 
-    shell: {
-      test: {
-        options: {
-          stdout: true
-        },
-        command: 'jasmine-node --coffee test/api_spec.coffee'
-      }
-    }
+    // shell: {
+    //   test: {
+    //     options: {
+    //       stdout: true
+    //     },
+    //     command: 'jasmine-node --coffee test/api_spec.coffee'
+    //   }
+    // }
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
