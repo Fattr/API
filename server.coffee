@@ -1,8 +1,10 @@
+
 # requiring dependencies
 
 express = require 'express'
 mongoose = require 'mongoose'
 passport = require 'passport'
+flash    = require 'connect-flash'
 
 # pass passport to our passport auth file for config
 auth = require('./src/config/passport.coffee')(passport)
@@ -25,6 +27,7 @@ app.use express.methodOverride()
 app.use express.session(secret: 'super_fit')
 app.use passport.initialize()
 app.use passport.session()
+app.use flash()
 
 # routes for api and DB endpoints
 require('./src/config/routes.coffee')(app, passport)
