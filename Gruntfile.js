@@ -3,25 +3,13 @@ module.exports = function(grunt) {
   'use strict';
   // Project configuration.
   grunt.initConfig({
+
     pkg: grunt.file.readJSON('package.json'),
+
     jasmine : {
       src : 'src/**/*.js',
       options : {
         specs : 'test/**/*.js'
-      }
-    },
-
-    coffee: {
-      glob_to_multiple: {
-        options: {
-          sourceMap: true
-        },
-        expand: true,
-        flatten: false,
-        cwd: 'src',
-        src: ['**/*.coffee'],
-        dest: 'compiled',
-        ext: '.js'
       }
     },
 
@@ -45,13 +33,18 @@ module.exports = function(grunt) {
           stdout: true
         },
         command: 'jasmine-node --coffee test/api_spec.coffee'
+      },
+      coffeecompile: {
+        options: {
+          stdout: true
+        },
+        command: 'coffee --output compiled --map --watch --compile .'
       }
     },
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-shell');
 
@@ -62,4 +55,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'watch');
   grunt.registerTask('serve', 'shell:server');
   grunt.registerTask('test', 'shell:test');
+  grunt.registerTask('coffee', ['coffeelint','shell:coffeecompile']);
 };
