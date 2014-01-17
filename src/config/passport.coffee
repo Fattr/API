@@ -19,11 +19,12 @@ module.exports = (passport) ->
     # LOOK INTO
     # possible to only serialize the user.id
     # not the entire user
-
-    done null, user
+    console.log 'passport', user
+    done null, {'_id': user._id, 'name': user.name}
 
   passport.deserializeUser (id, done) ->
     User.findById id._id, (err, user) ->
+      console.log 'deserializeUser', id
       done err, user
 
   # ===========================
@@ -45,7 +46,7 @@ module.exports = (passport) ->
 
         # chek to see if we already have a user with the
         # same facebook id
-        console.log 'refreshToken', refreshToken
+
 
         User.findOne('facebook.id': profile.id, (err, user) ->
           done err if err

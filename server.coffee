@@ -33,6 +33,6 @@ app.use flash()
 require('./src/config/routes.coffee')(app, passport)
 
 # use app.get to get port rather than hardcoded value.
-app.listen(app.get 'port')
+app.listen app.get 'port'
 
 console.log "I hears ya on #{app.get 'port'} breh!"

@@ -3,9 +3,7 @@
 mongoose = require 'mongoose'
 
 ServiceSchema = new mongoose.Schema(
-  _id: # service name
-    type: String
-    unique: true
+  name: String
 )
 
 module.exports = mongoose.model 'Service', ServiceSchema

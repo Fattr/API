@@ -6,12 +6,15 @@ StatSchema = new mongoose.Schema(
   user:
     type: mongoose.Schema.ObjectId
     ref: 'User'
+
   collectedFrom:
     type: mongoose.Schema.ObjectId
     ref: 'Service'
+
   date:
     type: Date
     default: Date.now
+
   fairlyActiveMinutes: Number
   lightlyActiveMinutes: Number
   marginalCalories: Number

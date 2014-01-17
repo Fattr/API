@@ -36,6 +36,8 @@
     "frisby": "~0.7.5",
     "jasmine-node": "~1.12.0",
     "grunt-coffeelint": "0.0.8",
-    "grunt-contrib-watch": "~0.5.3"
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-express": "~1.2.1",
+    "grunt-shell": "~0.6.1"
   }
 }
