@@ -68,6 +68,6 @@ module.exports = function(grunt) {
   grunt.registerTask('jaz', 'jasmine');
   // grunt.registerTask('test', 'shell:test');
   grunt.registerTask('serve', ['express:dev','test']);
-  grunt.registerTask('travis', ['build', 'serve']);
+  grunt.registerTask('travis', ['build']);
 
 };
