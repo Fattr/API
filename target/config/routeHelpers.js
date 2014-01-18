@@ -21,6 +21,4 @@
 
 }).call(this);
 
-/*
 //# sourceMappingURL=../../target/config/routeHelpers.js.map
-*/

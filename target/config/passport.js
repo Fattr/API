@@ -61,6 +61,4 @@
 
 }).call(this);
 
-/*
 //# sourceMappingURL=../../target/config/passport.js.map
-*/

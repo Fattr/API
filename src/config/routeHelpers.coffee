@@ -2,7 +2,7 @@
 
 userUser = require '../models/user'
 Stats = require '../models/stat'
-config = require './auth'
+
 # fitbit auth here here fitbit-js
 
 module.exports =
