@@ -1,6 +1,8 @@
   # auth config here our app credits
 'use strict'
 
+moves: 'W6ST7Bbm4zAgovgWE2lhvJ2hA2mkBW6EFl6_f_8aMkPR0AVBGlQ6Q_rqT0klZGGC'
+
 module.exports =
   facebook:
     clientID: '292173437605995'
@@ -9,7 +11,7 @@ module.exports =
 
   moves:
     clientID: '06WHH0zJHzWcA0VNgZO05PC8np2Rs29w'
-    clientSecret: 'W6ST7Bbm4zAgovgWE2lhvJ2hA2mkBW6EFl6_f_8aMkPR0AVBGlQ6Q_rqT0klZGGC'
+    clientSecret: moves
     callbackUrl: 'http://127.0.0.1:3000/auth/moves/callback'
 
   jawbone:
@@ -22,6 +24,8 @@ module.exports =
     clientSecret: 'ff4ac3eb6e504a8093ab30afc5fadfe7'
     # authorizationURL: 'https://runkeeper.com/apps/authorize'
 
-  # NIKE API doesn't let you register an app, but we can set it up that users can auth their accounts,
-  # and make requests to GET https://api.nike.com/me/sport/activities/{acitivyID}?access_token={access_token}
-  # to pull data. Each user will need to authenticate with their own personal access token.
+  # NIKE API doesn't let you register an app, but we can set it up that
+  # users can auth their accounts, and make requests to GET
+  # https://api.nike.com/me/sport/activities/{ID}?access_token={access_token}
+  # to pull data. Each user will need to authenticate with their own personal
+  # access token.
