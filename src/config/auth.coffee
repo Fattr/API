@@ -28,4 +28,4 @@ module.exports =
   # users can auth their accounts, and make requests to GET
   # https://api.nike.com/me/sport/activities/{ID}?access_token={access_token}
   # to pull data. Each user will need to authenticate with their own personal
-  # access token.
+  # access token. I'll look into this some more
