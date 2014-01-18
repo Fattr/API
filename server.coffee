@@ -6,6 +6,7 @@ mongoose = require 'mongoose'
 passport = require 'passport'
 
 
+
 # pass passport to our passport auth file for config
 auth = require('./src/config/passport.coffee')(passport)
 
