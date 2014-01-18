@@ -1,15 +1,15 @@
 (function() {
-  var app, auth, express, mongoConfig, mongoose, passport;
+  var app, express, headers, mongoConfig, mongoose;
 
   express = require('express');
 
   mongoose = require('mongoose');
 
-  passport = require('passport');
-
-  auth = require('./config/passport')(passport);
+  headers = require('./config/middleware');
 
   mongoConfig = require('./config/dbconfig');
+
+  mongoose.connect(mongoConfig.url);
 
   app = express();
 
@@ -17,21 +17,13 @@
 
   app.use(express.logger('dev'));
 
-  app.use(express.cookieParser());
+  app.use(headers.headers);
 
   app.use(express.bodyParser());
 
   app.use(express.methodOverride());
 
-  app.use(express.session({
-    secret: 'super_fit'
-  }));
-
-  app.use(passport.initialize());
-
-  app.use(passport.session());
-
-  require('./config/routes')(app, passport);
+  require('./config/routes')(app);
 
   app.listen(app.get('port'));
 

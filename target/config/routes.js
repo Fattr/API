@@ -1,19 +1,23 @@
 (function() {
-  var helper;
+  var apiKey, helper;
 
   helper = require('./routeHelpers');
 
-  module.exports = function(app, passport) {
+  module.exports = function(app) {
     app.get('/', helper.index);
-    app.get('/test', helper.test);
-    app.get('/facebook', passport.authenticate('facebook', function(req, res) {
-      console.log('auth user', req.user);
-      return res.send(req.user);
-    }));
-    return app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-      successRedirect: 'http://127.0.0.1:3000',
-      failureRedirect: 'https://www.yahoo.com'
-    }));
+    app.get('/test', apiKey, helper.test);
+    return app.post('/signup', apiKey, helper.signup);
+  };
+
+  apiKey = function(req, res, next) {
+    console.log(req.headers);
+    console.log('key', req.headers.apikey);
+    if (req.headers.apikey !== 'myKey') {
+      console.log('wrong key');
+      return res.send(500);
+    } else {
+      return next();
+    }
   };
 
 }).call(this);
