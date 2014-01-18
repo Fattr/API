@@ -44,16 +44,16 @@ module.exports = function(grunt) {
     watch: {
       files: ['src/**/*.coffee'],
       tasks: ['coffeelint','coffee']
-    }
+    },
 
-    // shell: {
-    //   test: {
-    //     options: {
-    //       stdout: true
-    //     },
-    //     command: 'jasmine-node --coffee test/api_spec.coffee'
-    //   }
-    // }
+    shell: {
+      test: {
+        options: {
+
+        },
+        command: 'jasmine-node --coffee test/api_spec.coffee'
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -69,8 +69,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', ['coffeelint', 'coffee']);
   grunt.registerTask('default', 'watch');
-  //grunt.registerTask('test', 'shell:test');
+  grunt.registerTask('test', 'shell:test');
   grunt.registerTask('serve', ['express:dev','test']);
-  grunt.registerTask('travis', 'build');
+  grunt.registerTask('travis', ['build', 'serve']);
 
 };
