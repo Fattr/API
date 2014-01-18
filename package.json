@@ -6,7 +6,7 @@
   "scripts": {
     "test": "grunt travis --verbose"
   },
-  "engine": {
+  "engines": {
     "node": "0.10.x"
   },
 
