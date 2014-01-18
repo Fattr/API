@@ -32,9 +32,9 @@ module.exports = function(grunt) {
       compile: {
         files: [{
           expand: true,
-          cwd: 'src/',
+          cwd: 'src',
           src: '**/*.coffee',
-          dest: 'target/',
+          dest: 'target',
           ext: '.js'
         }]
       }

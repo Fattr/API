@@ -1,1 +1,1 @@
-web: node api/target/server.js
+web: node target/server.js
