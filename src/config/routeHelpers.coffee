@@ -1,8 +1,8 @@
 # call backs for the routes
 
-userUser = require '../models/user.coffee'
-Stats = require '../models/stat.coffee'
-config = require './auth.coffee'
+userUser = require '../models/user'
+Stats = require '../models/stat'
+config = require './auth'
 # fitbit auth here here fitbit-js
 
 module.exports =

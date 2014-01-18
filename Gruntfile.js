@@ -25,18 +25,18 @@ module.exports = function(grunt) {
     },
 
     coffee: {
-      glob_to_multiple: {
-        options: {
-          sourceMap: true,
-          sourceMapDir: 'src/compiled/'
-        },
+      options: {
+        sourceMap: true
+      },
 
-        expand: true,
-        flatten: true,
-        cwd: 'src/',
-        src: ['*/**/*.coffee'],
-        dest: 'src/compiled',
-        ext: '.js'
+      compile: {
+        files: [{
+          expand: true,
+          cwd: 'src/',
+          src: '**/*.coffee',
+          dest: 'target/',
+          ext: '.js'
+        }]
       }
     },
 
@@ -68,6 +68,7 @@ module.exports = function(grunt) {
   // use grunt command no options
 
   grunt.registerTask('build', ['coffeelint', 'coffee']);
+  grunt.registerTask('default', 'watch');
   grunt.registerTask('jaz', 'jasmine');
   grunt.registerTask('test', 'shell:test');
   grunt.registerTask('serve', ['express:dev','test']);

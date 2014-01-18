@@ -6,6 +6,10 @@
   "scripts": {
     "test": "grunt travis --verbose"
   },
+  "engine": {
+    "node": "0.10.x"
+  },
+
   "repository": {
     "type": "git",
     "url": "https://github.com/Fittr/api.git"

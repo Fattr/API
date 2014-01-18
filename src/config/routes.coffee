@@ -1,5 +1,5 @@
 # routes for API and DB endpoints
-helper = require './routeHelpers.coffee'
+helper = require './routeHelpers'
 
 
 module.exports = (app, passport) ->

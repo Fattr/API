@@ -6,11 +6,10 @@ mongoose = require 'mongoose'
 passport = require 'passport'
 
 
-
 # pass passport to our passport auth file for config
-auth = require('./src/config/passport.coffee')(passport)
+auth = require('./config/passport')(passport)
 
-mongoConfig = require './src/config/dbconfig.coffee'
+mongoConfig = require './config/dbconfig'
 
 # connect to DB
 mongoose.connect mongoConfig.url
@@ -31,7 +30,7 @@ app.use passport.session()
 
 
 # routes for api and DB endpoints
-require('./src/config/routes.coffee')(app, passport)
+require('./config/routes')(app, passport)
 
 # use app.get to get port rather than hardcoded value.
 app.listen app.get 'port'

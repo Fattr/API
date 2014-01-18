@@ -2,8 +2,8 @@
 'use strict'
 
 FacebookStrategy = require('passport-facebook').Strategy
-authTokens = require './auth.coffee'
-User = require '../models/user.coffee'
+authTokens = require './auth'
+User = require '../models/user'
 
 module.exports = (passport) ->
 
