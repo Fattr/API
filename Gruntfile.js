@@ -6,9 +6,9 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     jasmine : {
-      src : 'src/**/*.js',
-      options : {
-        specs : 'test/**/*.js'
+      src: 'src/**/*.js',
+      options: {
+        specs: 'test/**/*.js'
       }
     },
     express: {
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
     shell: {
       test: {
         options: {
-
+          stdout: true
         },
         command: 'jasmine-node --coffee test/api_spec.coffee'
       }
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', ['coffeelint', 'coffee']);
   grunt.registerTask('default', 'watch');
-  grunt.registerTask('test', 'shell:test');
+  grunt.registerTask('test', 'shell');
   grunt.registerTask('serve', ['express:dev','test']);
   grunt.registerTask('travis', ['build', 'serve']);
 
