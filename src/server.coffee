@@ -3,7 +3,6 @@
 express = require 'express'
 mongoose = require 'mongoose'
 passport = require 'passport'
-logfmt = require 'logfmt'
 
 
 # pass passport to our passport auth file for config
@@ -18,7 +17,6 @@ app = express()
 # app config
 # express middleware for passport and sessions
 app.set 'port', process.env.PORT || 3000
-app.use logfmt.requestLogger()
 app.use express.logger('dev')
 
 app.use express.cookieParser()

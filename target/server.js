@@ -1,5 +1,5 @@
 (function() {
-  var app, auth, express, logfmt, mongoConfig, mongoose, passport;
+  var app, auth, express, mongoConfig, mongoose, passport;
 
   express = require('express');
 
