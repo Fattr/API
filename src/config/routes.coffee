@@ -2,18 +2,17 @@
 helper = require './routeHelpers'
 
 
-module.exports = (app, passport) ->
+module.exports = (app) ->
   app.get '/', helper.index
-  app.get '/test', helper.test
+  app.get '/test', apiKey, helper.test
 
-  # Facebook auth here
-  app.get '/facebook', passport.authenticate 'facebook', (req, res) ->
-    console.log 'auth user', req.user
-    res.send req.user
+  app.post '/signup', apiKey, helper.signup
 
-  # Facebook auth callback
-  # FIXME:!!!!!!!
-  # Add real callback url for front
-  app.get '/auth/facebook/callback', passport.authenticate 'facebook',
-  successRedirect: 'http://127.0.0.1:3000'
-  failureRedirect: 'https://www.yahoo.com'
+apiKey = (req, res, next) ->
+  console.log req.headers
+  console.log 'key', req.headers.apikey
+  if req.headers.apikey != 'myKey'
+    console.log 'wrong key'
+    res.send 500
+  else
+    next()
