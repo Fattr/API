@@ -7,8 +7,6 @@
 
   passport = require('passport');
 
-  logfmt = require('logfmt');
-
   auth = require('./config/passport')(passport);
 
   mongoConfig = require('./config/dbconfig');
@@ -16,8 +14,6 @@
   app = express();
 
   app.set('port', process.env.PORT || 3000);
-
-  app.use(logfmt.requestLogger());
 
   app.use(express.logger('dev'));
 
