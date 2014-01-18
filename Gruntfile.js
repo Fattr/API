@@ -15,7 +15,7 @@ module.exports = function(grunt) {
       dev: {
         options: {
           cmd: 'coffee',
-          script: 'server.coffee'
+          script: 'src/server.coffee'
         }
       }
     },
