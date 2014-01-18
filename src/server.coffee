@@ -11,7 +11,7 @@ auth = require('./config/passport')(passport)
 mongoConfig = require './config/dbconfig'
 
 # connect to DB
-mongoose.connect mongoConfig.url
+# mongoose.connect mongoConfig.url
 app = express()
 
 # app config
