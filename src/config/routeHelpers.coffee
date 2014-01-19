@@ -43,3 +43,17 @@ module.exports =
               console.log 'could not save user'
             res.send 201
       )
+
+  getOne: (req, res) ->
+    id = req.params.id
+    console.log id
+    User.findOne('_id': id, (err, user) ->
+      if err
+        console.log 'err', err
+        res.send 500
+      if not user
+        console.log "user isn't in the db"
+        res.send 204
+      if user
+        res.json(user)
+    )
