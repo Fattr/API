@@ -12,6 +12,7 @@ pids
 logs
 results
 compiled
+target
 
 npm-debug.log
 node_modules
