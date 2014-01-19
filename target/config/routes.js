@@ -1,23 +1,16 @@
 (function() {
-  var apiKey, helper;
+  var checkAPIKey, helper;
 
   helper = require('./routeHelpers');
 
+  checkAPIKey = require('./apiConfig')['checkApiKey'];
+
   module.exports = function(app) {
     app.get('/', helper.index);
-    app.get('/test', apiKey, helper.test);
-    return app.post('/signup', apiKey, helper.signup);
-  };
-
-  apiKey = function(req, res, next) {
-    console.log(req.headers);
-    console.log('key', req.headers.apikey);
-    if (req.headers.apikey !== 'myKey') {
-      console.log('wrong key');
-      return res.send(500);
-    } else {
-      return next();
-    }
+    app.post('/login', checkAPIKey, helper.login);
+    app.get('/users', checkAPIKey, helper.getAll);
+    app.post('/users', checkAPIKey, helper.signup);
+    return app.get('/users/:id', checkAPIKey, helper.getOne);
   };
 
 }).call(this);
