@@ -1,6 +1,7 @@
 'use strict'
 
 mongoose = require 'mongoose'
+bcrypt = require 'bcrypt-nodejs'
 
 UserSchema = new mongoose.Schema(
 
