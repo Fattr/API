@@ -25,3 +25,4 @@ frisby.create('POST /signup with apikey').post("#{URL}/signup",
   username: 'test'
   password: 'test'
   ).expectStatus(201).expectHeaderContains("Content-Type", "text/plain").toss()
+
