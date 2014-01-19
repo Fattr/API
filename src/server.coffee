@@ -3,9 +3,6 @@
 express = require 'express'
 mongoose = require 'mongoose'
 headers = require './config/middleware'
-
-# pass passport to our passport auth file for config
-
 mongoConfig = require './config/dbconfig'
 
 # connect to DB
@@ -20,9 +17,6 @@ app.use express.logger('dev')
 app.use headers.headers
 app.use express.bodyParser()
 app.use express.methodOverride()
-
-
-
 
 # routes for api and DB endpoints
 require('./config/routes')(app)
