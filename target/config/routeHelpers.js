@@ -155,6 +155,49 @@
           });
         }
       });
+    },
+    linkUserWithAuth: function(req, res) {
+      var authData, email, id, password;
+      email = req.body.email;
+      password = req.body.password;
+      authData = JSON.parse(req.body.authData);
+      id = req.params.id;
+      return User.findOne({
+        '_id': id,
+        'email': email
+      }, function(err, user) {
+        if (err) {
+          console.error('User.findOne error', err);
+          res.send(500);
+        }
+        if (!user) {
+          return res.send(204);
+        } else {
+          return bcrypt.compare(password, user.password, function(err, same) {
+            if (err) {
+              console.error('bcrypt.compare error', err);
+              return res.send(500);
+            } else if (!same) {
+              return res.send(401);
+            } else {
+              if (typeof authData.facebook === 'object') {
+                user.set("authData.facebook", authData.facebook);
+              }
+              if (typeof authData.twitter === 'object') {
+                user.set("authData.twitter", authData.twitter);
+              }
+              return user.save(function(err) {
+                if (err) {
+                  console.error('err', err);
+                  res.send(500);
+                }
+                res.setHeader("location", "" + apiUrl + "/users/" + user._id);
+                return res.json(user);
+              });
+            }
+          });
+        }
+      });
     }
   };
 
