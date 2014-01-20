@@ -19,22 +19,23 @@
       type: Date,
       "default": Date.now
     },
-    facebook: {
-      id: String,
-      avatar: String,
-      accesstoken: String,
-      refreshToken: String
+    authData: {
+      facebook: {
+        id: String,
+        accesstoken: String,
+        expiration_date: String
+      },
+      twitter: {
+        id: String,
+        screen_name: String,
+        auth_token: String,
+        auth_token_secret: String
+      }
     },
     services: [
       {
         type: mongoose.Schema.ObjectId,
         ref: 'Service'
-      }
-    ],
-    following: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User'
       }
     ]
   });
@@ -43,6 +44,4 @@
 
 }).call(this);
 
-/*
-//# sourceMappingURL=../../target/config/user.js.map
-*/
+//# sourceMappingURL=../../target/models/user.js.map
