@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "user_spec.js",
+  "sourceRoot": "../../src/test/",
+  "sources": [
+    "user_spec.coffee"
+  ],
+  "names": [],
+  "mappings": "AAA8B;CAAA;CAAA"
+}

@@ -44,5 +44,5 @@
 }).call(this);
 
 /*
-//# sourceMappingURL=../../target/config/user.js.map
+//# sourceMappingURL=../../target/user.js.map
 */

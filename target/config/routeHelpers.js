@@ -31,7 +31,7 @@
         }
         if (user) {
           res.setHeader("location", "" + apiUrl + "/login");
-          res.send(204);
+          res.send(409);
         }
         if (!user) {
           newUser = new User();
@@ -39,18 +39,18 @@
           return bcrypt.genSalt(10, function(err, salt) {
             if (err) {
               console.error('bcrypt.genSalt error: ', err);
-              return;
+              res.send(500);
             }
             return bcrypt.hash(password, salt, null, function(err, hash) {
               if (err) {
                 console.error('bcrypt.hash error: ', err);
-                return;
+                res.send(500);
               }
               newUser.password = hash;
               return newUser.save(function(err) {
                 var responseJSON;
                 if (err) {
-                  console.error('err', err);
+                  console.error('error - could not save user ', err);
                   res.send(500);
                 }
                 res.setHeader("location", "" + apiUrl + "/users/" + newUser._id);
@@ -72,7 +72,7 @@
         'email': email
       }, function(err, user) {
         if (err) {
-          console.error('findOne error', err);
+          console.error('Mongo findOne error ', err);
           res.send(500);
         }
         if (!user) {
@@ -80,7 +80,7 @@
         } else {
           return bcrypt.compare(password, user.password, function(err, same) {
             if (err) {
-              console.error('bcrypt.compare error', err);
+              console.error('bcrypt.compare error ', err);
               return res.send(500);
             } else if (!same) {
               return res.send(401);
@@ -99,7 +99,7 @@
         '_id': id
       }, function(err, user) {
         if (err) {
-          console.error('User.findOne error', err);
+          console.error('User.findOne error ', err);
           res.send(500);
         }
         if (!user) {
@@ -139,14 +139,14 @@
         } else {
           return bcrypt.compare(password, user.password, function(err, same) {
             if (err) {
-              console.error('bcrypt.compare error', err);
+              console.error('bcrypt.compare error ', err);
               return res.send(500);
             } else if (!same) {
               return res.send(401);
             } else {
               return user.remove(function(err, user) {
                 if (err) {
-                  console.error('user.remove error', err);
+                  console.error('user.remove error ', err);
                   res.send(500);
                 }
                 return res.json(204, user);
@@ -161,5 +161,5 @@
 }).call(this);
 
 /*
-//# sourceMappingURL=../../target/config/routeHelpers.js.map
+//# sourceMappingURL=../../target/routeHelpers.js.map
 */

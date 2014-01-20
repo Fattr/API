@@ -17,5 +17,5 @@
 }).call(this);
 
 /*
-//# sourceMappingURL=../../target/config/apiConfig.js.map
+//# sourceMappingURL=../../target/apiConfig.js.map
 */

@@ -35,5 +35,5 @@
 }).call(this);
 
 /*
-//# sourceMappingURL=../../target/config/body.js.map
+//# sourceMappingURL=../../target/body.js.map
 */

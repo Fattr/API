@@ -15,7 +15,7 @@ module.exports = function(grunt) {
       dev: {
         options: {
           cmd: 'coffee',
-          script: 'src/server.coffee'
+          script: 'src/app.coffee'
         }
       }
     },
@@ -51,14 +51,14 @@ module.exports = function(grunt) {
         options: {
           stdout: true
         },
-        command: 'jasmine-node --coffee test/api_spec.coffee'
+        command: 'jasmine-node --coffee src/test/route_spec.coffee'
       },
 
       server: {
         options: {
           stdout: true
         },
-        command: 'nodemon src/server.coffee'
+        command: 'nodemon src/app.coffee'
       }
     }
   });

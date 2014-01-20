@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "userFitness_spec.js",
+  "sourceRoot": "../../src/test/",
+  "sources": [
+    "userFitness_spec.coffee"
+  ],
+  "names": [],
+  "mappings": "AAA8B;CAAA;CAAA"
+}
