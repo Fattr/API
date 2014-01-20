@@ -4,6 +4,7 @@ User = require '../models/user'
 Stats = require '../models/stat'
 Session = require '../models/session'
 apiUrl = require('./apiConfig')['url']
+bcrypt = require 'bcrypt-nodejs'
 
 module.exports =
 
@@ -26,18 +27,26 @@ module.exports =
         # new user sign up
         newUser = new User()
         newUser.email = email
-        newUser.generateHash password
-
-        newUser.save (err) ->
+        
+        bcrypt.genSalt 10, (err, salt) ->
           if err
-            console.error 'err', err
-            res.send 500
-          res.setHeader "location", "#{apiUrl}/users/#{newUser._id}"
-          responseJSON = {}
-          responseJSON.createdAt = newUser.createdAt
-          responseJSON._id = newUser._id
-          # TO-DO: IMPLEMENT ACCESS TOKENS
-          res.json(201, responseJSON)
+            console.error 'bcrypt.genSalt error: ', err
+            return
+          bcrypt.hash password, salt, null, (err, hash) ->
+            if err
+              console.error 'bcrypt.hash error: ', err
+              return
+            newUser.password = hash
+            newUser.save (err) ->
+              if err
+                console.error 'err', err
+                res.send 500
+              res.setHeader "location", "#{apiUrl}/users/#{newUser._id}"
+              responseJSON = {}
+              responseJSON.createdAt = newUser.createdAt
+              responseJSON._id = newUser._id
+              # TO-DO: IMPLEMENT ACCESS TOKENS
+              res.json(201, responseJSON)
     )
 
   login: (req, res) ->
@@ -45,21 +54,29 @@ module.exports =
     password = req.body.password
     User.findOne('email': email, (err, user) ->
       if err
-        console.error 'err', err
+        console.error 'findOne error', err
         res.send 500
-      if (not user or not user.validPassword(password))
-        # email or password is incorrect
+      if not user
+        # email is incorrect
         res.send 401
       else
-        res.setHeader "location", "#{apiUrl}/users/#{user._id}"
-        res.json user
+        bcrypt.compare password, user.password, (err, same) ->
+          if err
+            console.error 'bcrypt.compare error', err
+            res.send 500
+          else if not same
+            # password is incorrect
+            res.send 401
+          else
+            res.setHeader "location", "#{apiUrl}/users/#{user._id}"
+            res.json user
     )
 
   getUser: (req, res) ->
     id = req.params.id
     User.findOne('_id': id, (err, user) ->
       if err
-        console.error 'err', err
+        console.error 'User.findOne error', err
         res.send 500
       if not user
         # user isn't in the db
@@ -72,7 +89,7 @@ module.exports =
     id = req.params.id
     User.find((err, users) ->
       if err
-        console.error 'err', err
+        console.error 'User.find error', err
         res.send 500
       res.json users
     )
@@ -82,19 +99,24 @@ module.exports =
     password = req.body.password
     id = req.params.id
     User.findOne({'_id':id, 'email':email}, (err, user) ->
-      console.log "USER ====>", user
       if err
-        console.error 'err', err
+        console.error 'User.findOne error', err
         res.send 500
       if not user
         # user is not in DB anyways..
         res.send 204
-      else if !user.validPassword(password)
-        res.send 401
       else
-        user.remove (err, user) ->
+        bcrypt.compare password, user.password, (err, same) ->
           if err
-            console.error 'err', err
+            console.error 'bcrypt.compare error', err
             res.send 500
-          res.json 204, user
+          else if not same
+            # password is incorrect
+            res.send 401
+          else
+            user.remove (err, user) ->
+              if err
+                console.error 'user.remove error', err
+                res.send 500
+              res.json 204, user
     )
