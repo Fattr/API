@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "session.js",
+  "sourceRoot": "../../src/models/",
+  "sources": [
+    "session.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;CAAA,KAAA,iBAAA;;CAAA,CAAA,CAAW,IAAA,CAAX,EAAW;;CAAX,CAEA,CAAoB,CAAA,EAAA,EAAQ,KAA5B;CACE,CACE,EADF;CACE,CAAM,EAAN,EAAA,EAAc;CAAd,CACQ,EADR,EACA;MAFF;CAAA,CAIO,EAAP,CAAA,CAJA;CAHF,GAEoB;;CAFpB,CAUA,CAAiB,EAAA,CAAX,CAAN,CAAyB,CAAR,IAAA;CAVjB"
+}
