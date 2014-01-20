@@ -7,11 +7,19 @@ UserSchema = new mongoose.Schema(
 
   name: String
 
-  username: String
-
   email:
     type: String
     unique: true
+
+  password: String
+
+  createdAt:
+    type: Date
+    default: Date.now
+
+  updatedAt:
+    type: Date
+    default: Date.now
 
   facebook:
     id: String
@@ -23,6 +31,11 @@ UserSchema = new mongoose.Schema(
     type: mongoose.Schema.ObjectId
     ref: 'Service'
   }]
+
+  following:[{
+    type: mongoose.Schema.ObjectId
+    ref: 'User'
+  }]
 )
 
 # methods ======================
@@ -32,6 +45,7 @@ UserSchema.methods.generateHash = (password) ->
 
 # checking if password is valid
 UserSchema.methods.validPassword = (password) ->
-  bcrypt.compareSync password, @local.password
+  console.log @
+  bcrypt.compareSync password, @password
 
 module.exports = mongoose.model 'User', UserSchema

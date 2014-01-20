@@ -3,57 +3,98 @@
 User = require '../models/user'
 Stats = require '../models/stat'
 Session = require '../models/session'
-
-
-# fitbit auth here here fitbit-js
+apiUrl = require('./apiConfig')['url']
 
 module.exports =
+
+  # TO-DO: DECIDE WHAT INDEX ROUTE SHOULD RETURN
   index: (req, res) ->
-    console.log req.headers
     res.json 'test': 'hello world'
 
-  test: (req, res) ->
-    console.log 'test user', req.user
-    res.json(req.user)
-
   signup: (req, res) ->
-    console.log 'trying to signup'
-    credit = req.body
-    process.nextTick () ->
+    email = req.body.email
+    password = req.body.password
+    User.findOne('email': email, (err, user) ->
+      if err
+        console.error 'err', err
+        res.send 500
+      if user
+        #user is already signed up, set location header to login route
+        res.setHeader "location", "#{apiUrl}/login"
+        res.send 204
+      if not user
+        # new user sign up
+        newUser = new User()
+        newUser.email = email
+        newUser.password = newUser.generateHash password
 
-      User.findOne('username': credit.username, (err, user) ->
-        console.log 'args', arguments
-        if err
-          console.log 'err', err
-          res.send 400
+        newUser.save (err) ->
+          if err
+            console.error 'err', err
+            res.send 500
+          res.setHeader "location", "#{apiUrl}/users/#{newUser._id}"
+          responseJSON = {}
+          responseJSON.createdAt = newUser.createdAt
+          responseJSON._id = newUser._id
+          # TO-DO: IMPLEMENT ACCESS TOKENS
+          res.json(201, responseJSON)
+    )
 
-        if user
-          console.log 'user is alredy in there, make them redirect to sign up'
-          res.send 401
+  login: (req, res) ->
+    email = req.body.email
+    password = req.body.password
+    User.findOne('email': email, (err, user) ->
+      if err
+        console.error 'err', err
+        res.send 500
+      if (not user or not user.validPassword(password))
+        # email or password is incorrect
+        res.send 401
+      else
+        res.setHeader "location", "#{apiUrl}/users/#{user._id}"
+        res.json user
+    )
 
-        if not user
-          console.log 'new user sign up'
-
-          newUser = new User()
-          newUser.username = credit.username
-          newUser.password = credit.password
-
-          newUser.save (err) ->
-            if err
-              console.log 'could not save user'
-            res.send 201
-      )
-
-  getOne: (req, res) ->
+  getUser: (req, res) ->
     id = req.params.id
-    console.log id
     User.findOne('_id': id, (err, user) ->
       if err
-        console.log 'err', err
+        console.error 'err', err
         res.send 500
       if not user
-        console.log "user isn't in the db"
+        # user isn't in the db
         res.send 204
       if user
-        res.json(user)
+        res.json user
+    )
+
+  getAll: (req, res) ->
+    id = req.params.id
+    User.find((err, users) ->
+      if err
+        console.error 'err', err
+        res.send 500
+      res.json users
+    )
+
+  deleteUser: (req, res) ->
+    email = req.body.email
+    password = req.body.password
+    id = req.params.id
+    User.findOne({'_id':id, 'email':email}, (err, user) ->
+      console.log "USER ====>", user
+      if err
+        console.error 'err', err
+        res.send 500
+      if not user
+        # user is not in DB anyways..
+        res.send 204
+      else if !user.validPassword(password)
+        res.send 401
+      else
+        user.remove (err, user) ->
+          if err
+            console.error 'err', err
+            res.send 500
+          res.json 204, user
     )
