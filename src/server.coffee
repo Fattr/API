@@ -2,7 +2,7 @@
 
 express = require 'express'
 mongoose = require 'mongoose'
-headers = require './config/middleware'
+cors = require './config/middleware'
 mongoConfig = require './config/dbconfig'
 
 # connect to DB
@@ -14,7 +14,7 @@ app = express()
 app.set 'port', process.env.PORT || 3000
 app.use express.logger('dev')
 
-app.use headers.headers
+app.use cors.headers
 app.use express.bodyParser()
 app.use express.methodOverride()
 
