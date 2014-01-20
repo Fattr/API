@@ -1,6 +1,6 @@
 (function() {
   module.exports = {
-    'url': 'mongodb://localhost/app'
+    'url': process.env.MONGOHQ_URL || 'mongodb://localhost/app'
   };
 
 }).call(this);

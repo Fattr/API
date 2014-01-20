@@ -6,5 +6,5 @@
     "dbconfig.coffee"
   ],
   "names": [],
-  "mappings": "AACA;CAAA,CAAA,CACE,GADI,CAAN;CACE,CAAO,EAAP,CAAA,oBAAA;CADF,GAAA;CAAA"
+  "mappings": "AACA;CAAA,CAAA,CACE,GADI,CAAN;CACE,CAAO,CAAW,CAAlB,CAAA,EAAc,IAAP,cAAP;CADF,GAAA;CAAA"
 }
