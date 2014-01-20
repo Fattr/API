@@ -13,11 +13,11 @@ UserSchema = new mongoose.Schema(
 
   password: String
 
-  createdAt: 
+  createdAt:
     type: Date
     default: Date.now
 
-  updatedAt: 
+  updatedAt:
     type: Date
     default: Date.now
 

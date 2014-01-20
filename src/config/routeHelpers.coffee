@@ -16,7 +16,7 @@ module.exports =
     password = req.body.password
     User.findOne('email': email, (err, user) ->
       if err
-        console.log 'err', err
+        console.error 'err', err
         res.send 500
       if user
         #user is already signed up, set location header to login route
@@ -30,10 +30,14 @@ module.exports =
 
         newUser.save (err) ->
           if err
-            console.log 'err', err
+            console.error 'err', err
             res.send 500
           res.setHeader "location", "#{apiUrl}/users/#{newUser._id}"
-          res.send(201)
+          responseJSON = {}
+          responseJSON.createdAt = newUser.createdAt
+          responseJSON._id = newUser._id
+          # TO-DO: IMPLEMENT ACCESS TOKENS
+          res.json(201, responseJSON)
     )
 
   login: (req, res) ->
@@ -41,7 +45,7 @@ module.exports =
     password = req.body.password
     User.findOne('email': email, (err, user) ->
       if err
-        console.log 'err', err
+        console.error 'err', err
         res.send 500
       if (not user or not user.validPassword(password))
         # email or password is incorrect
@@ -51,24 +55,46 @@ module.exports =
         res.json user
     )
 
-  getOne: (req, res) ->
+  getUser: (req, res) ->
     id = req.params.id
     User.findOne('_id': id, (err, user) ->
       if err
-        console.log 'err', err
+        console.error 'err', err
         res.send 500
       if not user
         # user isn't in the db
         res.send 204
       if user
-        res.json user 
+        res.json user
     )
 
   getAll: (req, res) ->
     id = req.params.id
     User.find((err, users) ->
       if err
-        console.log 'err', err
+        console.error 'err', err
         res.send 500
       res.json users
+    )
+
+  deleteUser: (req, res) ->
+    email = req.body.email
+    password = req.body.password
+    id = req.params.id
+    User.findOne({'_id':id, 'email':email}, (err, user) ->
+      console.log "USER ====>", user
+      if err
+        console.error 'err', err
+        res.send 500
+      if not user
+        # user is not in DB anyways..
+        res.send 204
+      else if !user.validPassword(password)
+        res.send 401
+      else
+        user.remove (err, user) ->
+          if err
+            console.error 'err', err
+            res.send 500
+          res.json 204, user
     )

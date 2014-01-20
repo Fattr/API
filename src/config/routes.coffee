@@ -10,4 +10,5 @@ module.exports = (app) ->
   app.get '/users', checkAPIKey, helper.getAll
   app.post '/users', checkAPIKey, helper.signup
 
-  app.get '/users/:id', checkAPIKey, helper.getOne
+  app.get '/users/:id', checkAPIKey, helper.getUser
+  app.delete '/users/:id', checkAPIKey, helper.deleteUser

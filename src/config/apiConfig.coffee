@@ -1,6 +1,6 @@
 port = process.env.PORT || 3000
 
-module.exports = 
+module.exports =
 
   checkApiKey: (req, res, next) ->
     console.log req.headers
