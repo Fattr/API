@@ -17,6 +17,4 @@
 
 }).call(this);
 
-/*
 //# sourceMappingURL=../../target/config/routes.js.map
-*/
