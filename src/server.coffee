@@ -14,7 +14,7 @@ app = express()
 app.set 'port', process.env.PORT || 3000
 app.use express.logger('dev')
 
-# app.use cors.headers
+app.use cors.headers
 app.use express.bodyParser()
 app.use express.methodOverride()
 
