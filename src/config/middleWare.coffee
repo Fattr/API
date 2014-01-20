@@ -9,4 +9,4 @@ module.exports =
 
                 # no === in coffeeScript
                 # this is for CORS preflight checks
-    if req.methods == 'OPTIONS' then res.send 200 else next()
+    if req.method == 'OPTIONS' then res.send 200 else next()
