@@ -2,7 +2,7 @@
 
 express = require 'express'
 mongoose = require 'mongoose'
-cors = require './config/middleware'
+cors = require './config/middleWare'
 mongoConfig = require './config/dbconfig'
 
 # connect to DB
