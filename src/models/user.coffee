@@ -1,7 +1,6 @@
 'use strict'
 
 mongoose = require 'mongoose'
-bcrypt = require 'bcrypt-nodejs'
 
 UserSchema = new mongoose.Schema(
 
@@ -37,15 +36,5 @@ UserSchema = new mongoose.Schema(
     ref: 'User'
   }]
 )
-
-# methods ======================
-# generating a hash
-UserSchema.methods.generateHash = (password) ->
-  bcrypt.hashSync password, bcrypt.genSaltSync(8), null
-
-# checking if password is valid
-UserSchema.methods.validPassword = (password) ->
-  console.log @
-  bcrypt.compareSync password, @password
 
 module.exports = mongoose.model 'User', UserSchema
