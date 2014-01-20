@@ -52,6 +52,13 @@ module.exports = function(grunt) {
           stdout: true
         },
         command: 'jasmine-node --coffee test/api_spec.coffee'
+      },
+
+      server: {
+        options: {
+          stdout: true
+        },
+        command: 'nodemon src/server.coffee'
       }
     }
   });
@@ -68,10 +75,9 @@ module.exports = function(grunt) {
   // use grunt command no options
 
   grunt.registerTask('build', ['coffeelint', 'coffee']);
-  grunt.registerTask('default', 'watch');
+  grunt.registerTask('default', 'shell:server');
   grunt.registerTask('jaz', 'jasmine');
-  grunt.registerTask('test', 'shell:test');
-  grunt.registerTask('serve', ['express:dev','test']);
+  grunt.registerTask('test', ['express:dev','shell:test']);
   grunt.registerTask('travis', ['build']);
 
 };
