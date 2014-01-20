@@ -17,7 +17,7 @@ UserSchema = new mongoose.Schema(
     type: Date
     default: Date.now
 
-  updatedAt:
+  updatedAt: 
     type: Date
     default: Date.now
 
@@ -41,11 +41,18 @@ UserSchema = new mongoose.Schema(
 # methods ======================
 # generating a hash
 UserSchema.methods.generateHash = (password) ->
-  bcrypt.hashSync password, bcrypt.genSaltSync(8), null
+  bcrypt.genSalt 10, (err, salt) =>
+    if err
+      console.error err
+      return
+    bcrypt.hash password, salt, null, (err, hash) =>
+      if err
+        console.error err
+        return
+      @password = hash
 
 # checking if password is valid
 UserSchema.methods.validPassword = (password) ->
-  console.log @
   bcrypt.compareSync password, @password
 
 module.exports = mongoose.model 'User', UserSchema

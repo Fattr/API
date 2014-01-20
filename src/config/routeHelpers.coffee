@@ -26,7 +26,7 @@ module.exports =
         # new user sign up
         newUser = new User()
         newUser.email = email
-        newUser.password = newUser.generateHash password
+        newUser.generateHash password
 
         newUser.save (err) ->
           if err
