@@ -8,7 +8,7 @@ module.exports = (app) ->
   app.post '/login', checkAPIKey, helper.login
   app.post '/logout', checkAPIKey, helper.logout
 
-  app.get '/users', checkAPIKey, helper.test, helper.getAll
+  app.get '/users', checkAPIKey, helper.getAll
   app.post '/users', checkAPIKey, helper.signup
 
   app.get '/users/:id', checkAPIKey, helper.getUser
