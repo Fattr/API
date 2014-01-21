@@ -1,5 +1,5 @@
 (function() {
-  var Session, Stats, User, apiUrl, bcrypt;
+  var Session, Stats, User, apiUrl, bcrypt, uuid;
 
   User = require('../models/user');
 
@@ -10,6 +10,8 @@
   apiUrl = require('./apiConfig')['url'];
 
   bcrypt = require('bcrypt-nodejs');
+
+  uuid = require('node-uuid');
 
   module.exports = {
     index: function(req, res) {
@@ -24,7 +26,7 @@
       return User.findOne({
         'email': email
       }, function(err, user) {
-        var newUser;
+        var newSession, newUser;
         if (err) {
           console.error('err', err);
           res.send(500);
@@ -34,6 +36,8 @@
           res.send(409);
         }
         if (!user) {
+          newSession = new Session();
+          newSession._access_token = uuid.v4();
           newUser = new User();
           newUser.email = email;
           return bcrypt.genSalt(10, function(err, salt) {
@@ -57,7 +61,15 @@
                 responseJSON = {};
                 responseJSON.createdAt = newUser.createdAt;
                 responseJSON._id = newUser._id;
-                return res.json(201, responseJSON);
+                newSession._userId = newUser._id;
+                return newSession.save(function(err) {
+                  if (err) {
+                    console.log('failed: could notsave session', err);
+                    res.send(500);
+                  }
+                  responseJSON._access_token = newSession._access_token;
+                  return res.json(201, responseJSON);
+                });
               });
             });
           });
@@ -79,14 +91,28 @@
           return res.send(401);
         } else {
           return bcrypt.compare(password, user.password, function(err, same) {
+            var responseJSON, session;
             if (err) {
               console.error('bcrypt.compare error ', err);
               return res.send(500);
             } else if (!same) {
               return res.send(401);
             } else {
+              responseJSON = {};
+              responseJSON._id = user._id;
+              responseJSON.createdAt = user.createdAt;
               res.setHeader("location", "" + apiUrl + "/users/" + user._id);
-              return res.json(user);
+              session = new Session();
+              session._userId = user._id;
+              session._access_token = uuid.v4();
+              return session.save(function(err) {
+                if (err) {
+                  console.log('could not make session in log in', err);
+                  res.send(500);
+                }
+                responseJSON._access_token = session._access_token;
+                return res.json(responseJSON);
+              });
             }
           });
         }
@@ -203,6 +229,4 @@
 
 }).call(this);
 
-/*
-//# sourceMappingURL=../../target/routeHelpers.js.map
-*/
+//# sourceMappingURL=../../target/config/routeHelpers.js.map

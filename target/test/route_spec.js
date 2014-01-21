@@ -66,9 +66,42 @@
       return mongoose.connect(dbURI, done);
     });
     return describe('Sign up new user', function() {
-      return it("Should be able to POST /login with api key", function(done) {
-        return request(app).post('/users').set('apikey', 'myKey').end(function(err, res) {
+      it("Should be able to POST and sign up new user with apikey", function(done) {
+        return request(app).post('/users', {
+          email: 'test@test.com',
+          password: 'test'
+        }).set('apikey', 'myKey').end(function(err, res) {
           expect(err).to.be(null);
+          expect(res.status).to.be(201);
+          expect(res.body).not.to.empty();
+          expect(res.body).to.be.an('object');
+          return done();
+        });
+      });
+      it("Should return createdAt on signup", function(done) {
+        return request(app).post('/users', {
+          email: 'test@test.com',
+          password: 'test'
+        }).set('apikey', 'myKey').end(function(err, res) {
+          expect(res.body).to.have.property('createdAt');
+          return done();
+        });
+      });
+      it("Should return access token on signup", function(done) {
+        return request(app).post('/users', {
+          email: 'test@test.com',
+          password: 'test'
+        }).set('apikey', 'myKey').end(function(err, res) {
+          expect(res.body).to.have.property('_access_token');
+          return done();
+        });
+      });
+      return it("Should return _id on signup", function(done) {
+        return request(app).post('/users', {
+          email: 'test@test.com',
+          password: 'test'
+        }).set('apikey', 'myKey').end(function(err, res) {
+          expect(res.body).to.have.property('_id');
           return done();
         });
       });
@@ -77,6 +110,4 @@
 
 }).call(this);
 
-/*
-//# sourceMappingURL=../../target/route_spec.js.map
-*/
+//# sourceMappingURL=../../target/test/route_spec.js.map

@@ -52,8 +52,34 @@ describe 'Auth with API Key', ->
 
   describe 'Sign up new user', ->
 
-    it "Should be able to POST /login with api key", (done) ->
-      request(app).post('/users').set('apikey', 'myKey').end (err, res) ->
+    # TODO: make test for smae user sign up
+
+    it "Should be able to POST and sign up new user with apikey", (done) ->
+      request(app).post('/users',{email:'test@test.com',password:'test'})
+      .set('apikey', 'myKey').end (err, res) ->
         expect(err).to.be null
+        expect(res.status).to.be 201
+        expect(res.body).not.to.empty()
+        expect(res.body).to.be.an 'object'
         do done
+
+
+    it "Should return createdAt on signup", (done) ->
+      request(app).post('/users',{email:'test@test.com',password:'test'})
+      .set('apikey', 'myKey').end (err, res) ->
+        expect(res.body).to.have.property 'createdAt'
+        do done
+
+    it "Should return access token on signup", (done) ->
+      request(app).post('/users',{email:'test@test.com',password:'test'})
+      .set('apikey', 'myKey').end (err, res) ->
+        expect(res.body).to.have.property '_access_token'
+        do done
+
+    it "Should return _id on signup", (done) ->
+      request(app).post('/users',{email:'test@test.com',password:'test'})
+      .set('apikey', 'myKey').end (err, res) ->
+        expect(res.body).to.have.property '_id'
+        do done
+
 

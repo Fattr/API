@@ -12,6 +12,4 @@
 
 }).call(this);
 
-/*
-//# sourceMappingURL=../../target/service.js.map
-*/
+//# sourceMappingURL=../../target/models/service.js.map

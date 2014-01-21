@@ -12,11 +12,13 @@
     _userId: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
-      unique: true
+      unique: true,
+      required: true
     },
     _access_token: {
       type: String,
-      unique: true
+      unique: true,
+      required: true
     }
   });
 
@@ -24,6 +26,4 @@
 
 }).call(this);
 
-/*
-//# sourceMappingURL=../../target/session.js.map
-*/
+//# sourceMappingURL=../../target/models/session.js.map

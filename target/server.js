@@ -29,6 +29,4 @@
 
 }).call(this);
 
-/*
 //# sourceMappingURL=../target/server.js.map
-*/

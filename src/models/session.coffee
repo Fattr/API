@@ -10,11 +10,13 @@ SessionSchema = new mongoose.Schema(
     type: mongoose.Schema.ObjectId
     ref: 'User'
     unique: true # so one user cannot have more than one session
+    required: true
 
 
   _access_token:
     type: String
     unique: true
+    required: true
 )
 
 module.exports = mongoose.model 'Session', SessionSchema
