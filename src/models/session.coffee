@@ -11,6 +11,7 @@ SessionSchema = new mongoose.Schema(
     ref: 'User'
     unique: true # so one user cannot have more than one session
 
+
   _access_token:
     type: String
     unique: true
