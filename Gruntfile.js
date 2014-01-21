@@ -40,44 +40,35 @@ module.exports = function(grunt) {
       }
     },
 
-
     watch: {
       files: ['src/**/*.coffee'],
       tasks: ['coffeelint','coffee']
     },
 
-    shell: {
+    mochaTest: {
       test: {
         options: {
-          stdout: true
+          reporter: 'spec',
+          require: 'coffee-script'
         },
-        command: 'jasmine-node --coffee src/test/route_spec.coffee'
-      },
-
-      server: {
-        options: {
-          stdout: true
-        },
-        command: 'nodemon src/app.coffee'
+        src: ['src/test/**/*.coffee']
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-shell');
-
+  grunt.loadNpmTasks('grunt-mocha-test');
 
   // deafult tasks lints and compiles coffe
   // use grunt command no options
 
   grunt.registerTask('build', ['coffeelint', 'coffee']);
   grunt.registerTask('default', 'shell:server');
-  grunt.registerTask('jaz', 'jasmine');
-  grunt.registerTask('test', ['express:dev','shell:test']);
-  grunt.registerTask('travis', ['build']);
+  grunt.registerTask('test', 'mochaTest:test');
+  grunt.registerTask('travis', ['build', 'test']);
 
 };

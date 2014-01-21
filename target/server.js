@@ -25,10 +25,8 @@
 
   require('./config/routes')(app);
 
-  modules.exports = app;
+  module.exports = app;
 
 }).call(this);
 
-/*
 //# sourceMappingURL=../target/server.js.map
-*/
