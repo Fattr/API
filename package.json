@@ -24,7 +24,7 @@
     "fitbit-js": "~0.2.0",
     "mongoose": "~3.8.4",
     "grunt": "~0.4.2",
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt-nodejs": "0.0.3"
   },
   "devDependencies": {
     "grunt-contrib-jasmine": "~0.5.2",
