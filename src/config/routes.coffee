@@ -14,3 +14,6 @@ module.exports = (app) ->
   app.get '/users/:id', checkAPIKey, helper.getUser
   app.delete '/users/:id', checkAPIKey, helper.deleteUser
   app.put '/users/:id', checkAPIKey, helper.linkUserWithAuth
+
+  app.get '/fitbit', helper.fitbitTokens
+  app.get '/auth/fitbit/callback', helper.fitbitCallback
