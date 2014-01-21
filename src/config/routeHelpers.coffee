@@ -1,10 +1,11 @@
 # call backs for the routes
 
-User = require '../models/user'
-Stats = require '../models/stat'
+User    = require '../models/user'
+Stats   = require '../models/stat'
 Session = require '../models/session'
-apiUrl = require('./apiConfig')['url']
-bcrypt = require 'bcrypt-nodejs'
+apiUrl  = require('./apiConfig')['url']
+bcrypt  = require 'bcrypt-nodejs'
+uuid    = require 'node-uuid'
 
 module.exports =
 
@@ -26,6 +27,10 @@ module.exports =
         res.send 409 # conflict error
       if not user
         # new user sign up
+        # create new access_token
+        newSession = new Session()
+        newSession._access_token = uuid.v4()
+
         newUser = new User()
         newUser.email = email
 
@@ -47,7 +52,13 @@ module.exports =
               responseJSON.createdAt = newUser.createdAt
               responseJSON._id = newUser._id
               # TO-DO: IMPLEMENT ACCESS TOKENS
-              res.json 201, responseJSON
+              newSession._userId = newUser._id
+              newSession.save (err) ->
+                if err
+                  console.log 'failed: could notsave session', err
+                  res.send 500
+                responseJSON._access_token = newSession._access_token
+                res.json 201, responseJSON
     )
 
   login: (req, res) ->
@@ -69,8 +80,22 @@ module.exports =
             # password is incorrect
             res.send 401
           else
+            responseJSON = {}
+            responseJSON._id = user._id
+            responseJSON.createdAt = user.createdAt
             res.setHeader "location", "#{apiUrl}/users/#{user._id}"
-            res.json user
+            session = new Session()
+            session._userId = user._id
+            session._access_token = uuid.v4()
+            session.save (err) ->
+              if err
+                # make logout route to fix the error
+                # logout should delete the session
+                # one user can not have more than one session
+                console.log 'could not make session in log in', err
+                res.send 500
+              responseJSON._access_token = session._access_token
+              res.json responseJSON
     )
 
   getUser: (req, res) ->

@@ -28,6 +28,4 @@
 
 }).call(this);
 
-/*
-//# sourceMappingURL=../../target/followerConnection.js.map
-*/
+//# sourceMappingURL=../../target/models/followerConnection.js.map

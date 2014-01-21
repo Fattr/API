@@ -15,6 +15,4 @@
 
 }).call(this);
 
-/*
-//# sourceMappingURL=../../target/middleWare.js.map
-*/
+//# sourceMappingURL=../../target/config/middleWare.js.map
