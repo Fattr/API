@@ -5,12 +5,6 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
-    jasmine : {
-      src: 'src/**/*.js',
-      options: {
-        specs: 'test/**/*.js'
-      }
-    },
     express: {
       dev: {
         options: {
@@ -51,6 +45,15 @@ module.exports = function(grunt) {
           reporter: 'spec'
         },
         src: ['target/test/route_spec.js']
+      }
+    },
+
+    shell: {
+      server: {
+        options: {
+          stdout: true
+        },
+        command: 'nodemon src/app.coffee'
       }
     }
   });

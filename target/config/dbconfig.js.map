@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "dbconfig.js",
+  "sourceRoot": "../../src/config/",
+  "sources": [
+    "dbconfig.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA;CAAA,CAAA,CACE,GADI,CAAN;CACE,CAAO,CAAW,CAAlB,CAAA,EAAc,IAAP,cAAP;CADF,GAAA;CAAA"
+}
