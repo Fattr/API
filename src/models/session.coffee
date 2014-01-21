@@ -9,9 +9,7 @@ SessionSchema = new mongoose.Schema(
   _userId:
     type: mongoose.Schema.ObjectId
     ref: 'User'
-    unique: true # so one user cannot have more than one session
     required: true
-
 
   _access_token:
     type: String
