@@ -98,6 +98,19 @@ module.exports =
               res.json responseJSON
     )
 
+  logout: (req, res) ->
+    user_id = req.body._id
+    Session.findOne('userId': user_id, (err, session) ->
+      if err
+        console.log 'err finding session to log out', err
+        res.send 500
+      session.remove (err, sesh) ->
+        if err
+          console.log 'err removing session logout'
+          res.send 500
+        res.send 204, sesh
+    )
+
   getUser: (req, res) ->
     id = req.params.id
     User.findOne('_id': id, (err, user) ->

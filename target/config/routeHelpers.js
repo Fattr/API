@@ -118,6 +118,25 @@
         }
       });
     },
+    logout: function(req, res) {
+      var user_id;
+      user_id = req.body._id;
+      return Session.findOne({
+        'userId': user_id
+      }, function(err, session) {
+        if (err) {
+          console.log('err finding session to log out', err);
+          res.send(500);
+        }
+        return session.remove(function(err, sesh) {
+          if (err) {
+            console.log('err removing session logout');
+            res.send(500);
+          }
+          return res.send(204, sesh);
+        });
+      });
+    },
     getUser: function(req, res) {
       var id;
       id = req.params.id;
