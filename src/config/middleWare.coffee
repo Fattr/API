@@ -4,7 +4,7 @@ module.exports =
     res.header 'Access-Control-Allow-Methods',
                 'GET, POST, PUT, DELETE, OPTIONS'
     res.header 'Access-Control-Allow-Headers',
-                'Content-Type, Apikey, Authorization, Content-Length,
+                'Content-Type, fittr-api-key, Authorization, Content-Length,
                 X-Requested-With'
 
 
