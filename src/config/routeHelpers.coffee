@@ -98,7 +98,7 @@ module.exports =
 
   logout: (req, res) ->
     user_id = req._userid
-    Session.findOne('userId': user_id, (err, session) ->
+    Session.findOne('_userId': user_id, (err, session) ->
       if err
         console.log 'err finding session to log out', err
         res.send 500
