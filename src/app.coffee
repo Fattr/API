@@ -1,4 +1,4 @@
-app = require './server '
+app = require './server'
 
 
 app.listen app.get 'port'
