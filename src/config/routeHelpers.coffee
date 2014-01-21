@@ -8,6 +8,9 @@ bcrypt  = require 'bcrypt-nodejs'
 uuid    = require 'node-uuid'
 
 module.exports =
+  test: (req, res, next) ->
+    console.log req.headers
+    next()
 
   # TO-DO: DECIDE WHAT INDEX ROUTE SHOULD RETURN
   index: (req, res) ->

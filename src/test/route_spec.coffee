@@ -55,9 +55,9 @@ describe 'Auth with API Key', ->
 
     # TODO: make test for smae user sign up
 
-    it "Should be able to POST and sign up new user with apikey", (done) ->
+    it "Should POST and sign up new user with fittr-api-key", (done) ->
       request(app).post('/users',{email:'test@test.com',password:'test'})
-      .set('apikey', 'myKey').end (err, res) ->
+      .set('fittr-api-key', 'myKey').end (err, res) ->
         expect(err).to.be null
         expect(res.status).to.be 201
         expect(res.body).not.to.empty()
@@ -66,19 +66,19 @@ describe 'Auth with API Key', ->
 
     it "Should return createdAt on signup", (done) ->
       request(app).post('/users',{email:'test@test.com',password:'test'})
-      .set('apikey', 'myKey').end (err, res) ->
+      .set('fittr-api-key', 'myKey').end (err, res) ->
         expect(res.body).to.have.property 'createdAt'
         do done
 
     it "Should return access token on signup", (done) ->
       request(app).post('/users',{email:'test@test.com',password:'test'})
-      .set('apikey', 'myKey').end (err, res) ->
+      .set('fittr-api-key', 'myKey').end (err, res) ->
         expect(res.body).to.have.property '_access_token'
         do done
 
     it "Should return _id on signup", (done) ->
       request(app).post('/users',{email:'test@test.com',password:'test'})
-      .set('apikey', 'myKey').end (err, res) ->
+      .set('fittr-api-key', 'myKey').end (err, res) ->
         expect(res.body).to.have.property '_id'
         do done
 
