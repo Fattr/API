@@ -1,11 +1,20 @@
 mongoose = require 'mongoose'
 
 SessionSchema = new mongoose.Schema(
-  user:
-    type: mongoose.Schema.ObjectId
-    unique: true
+  _expiration:
+    type: Date
+    expires: '30d'
+    default: Date.now()
 
-  token: String
+  _userId:
+    type: mongoose.Schema.ObjectId
+    ref: 'User'
+    unique: true # so one user cannot have more than one session
+
+
+  _access_token:
+    type: String
+    unique: true
 )
 
 module.exports = mongoose.model 'Session', SessionSchema

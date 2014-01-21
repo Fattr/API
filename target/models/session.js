@@ -4,11 +4,20 @@
   mongoose = require('mongoose');
 
   SessionSchema = new mongoose.Schema({
-    user: {
+    _expiration: {
+      type: Date,
+      expires: '30d',
+      "default": Date.now()
+    },
+    _userId: {
       type: mongoose.Schema.ObjectId,
+      ref: 'User',
       unique: true
     },
-    token: String
+    _access_token: {
+      type: String,
+      unique: true
+    }
   });
 
   module.exports = mongoose.model('Session', SessionSchema);
