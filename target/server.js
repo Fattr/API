@@ -1,5 +1,5 @@
 (function() {
-  var app, cors, express, mongoConfig, mongoose;
+  var app, cors, express, mongoConfig, mongoose, passport;
 
   express = require('express');
 
@@ -9,7 +9,11 @@
 
   mongoConfig = require('./config/dbconfig');
 
+  passport = require('passport');
+
   mongoose.connect(mongoConfig.url);
+
+  require('./config/passport')(passport);
 
   app = express();
 
@@ -23,7 +27,9 @@
 
   app.use(express.methodOverride());
 
-  require('./config/routes')(app);
+  app.use(passport.initialize());
+
+  require('./config/routes')(app, passport);
 
   app.listen(app.get('port'));
 

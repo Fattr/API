@@ -20,6 +20,11 @@
       "default": Date.now
     },
     authData: {
+      fitbit: {
+        id: String,
+        access_token: String,
+        access_token_secret: String
+      },
       facebook: {
         id: String,
         access_token: String,

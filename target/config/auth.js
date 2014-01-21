@@ -5,6 +5,10 @@
   });
 
   module.exports = {
+    fitbit: {
+      consumerKey: 'c867904086cf45ae9c279887abaa70b8',
+      consumerSecret: '88a34c95291e4a409910b328cc0d5ef3'
+    },
     facebook: {
       clientID: '292173437605995',
       clientSecret: 'd471dc58c7c519ded6d72aef4321495c',

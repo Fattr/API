@@ -157,10 +157,11 @@
       });
     },
     linkUserWithAuth: function(req, res) {
-      var authData, email, id, password;
+      var authData, dataToUpdate, email, id, password;
       email = req.body.email;
       password = req.body.password;
       authData = JSON.parse(req.body.authData);
+      dataToUpdate = JSON.parse(req.body);
       id = req.params.id;
       return User.findOne({
         '_id': id,
@@ -180,6 +181,7 @@
             } else if (!same) {
               return res.send(401);
             } else {
+              console.log(dataToUpdate);
               if (typeof authData.facebook === 'object') {
                 user.set("authData.facebook", authData.facebook);
               }
