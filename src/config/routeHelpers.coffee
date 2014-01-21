@@ -8,9 +8,6 @@ bcrypt  = require 'bcrypt-nodejs'
 uuid    = require 'node-uuid'
 
 module.exports =
-  test: (req, res, next) ->
-    console.log req.headers
-    next()
 
   # TO-DO: DECIDE WHAT INDEX ROUTE SHOULD RETURN
   index: (req, res) ->
@@ -53,12 +50,10 @@ module.exports =
               res.setHeader "location", "#{apiUrl}/users/#{newUser._id}"
               responseJSON = {}
               responseJSON.createdAt = newUser.createdAt
-              responseJSON._id = newUser._id
-              # TO-DO: IMPLEMENT ACCESS TOKENS
-              newSession._userId = newUser._id
+              responseJSON._id = newSession._userId = newUser._id
               newSession.save (err) ->
                 if err
-                  console.log 'failed: could notsave session', err
+                  console.log 'failed: could not save session', err
                   res.send 500
                 responseJSON._access_token = newSession._access_token
                 res.json 201, responseJSON
@@ -102,7 +97,7 @@ module.exports =
     )
 
   logout: (req, res) ->
-    user_id = req.body._id
+    user_id = req._userid
     Session.findOne('userId': user_id, (err, session) ->
       if err
         console.log 'err finding session to log out', err
@@ -116,6 +111,7 @@ module.exports =
 
   getUser: (req, res) ->
     id = req.params.id
+    res.send 401 if id isnt req._userid # can only get logged in user's info
     User.findOne('_id': id, (err, user) ->
       if err
         console.error 'User.findOne error ', err
