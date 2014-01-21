@@ -15,6 +15,4 @@
 
 }).call(this);
 
-/*
-//# sourceMappingURL=../../target/config/session.js.map
-*/
+//# sourceMappingURL=../../target/models/session.js.map

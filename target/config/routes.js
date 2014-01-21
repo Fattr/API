@@ -8,15 +8,13 @@
   module.exports = function(app) {
     app.get('/', helper.index);
     app.post('/login', checkAPIKey, helper.login);
-    app.post('/signup', checkAPIKey, helper.signup);
     app.get('/users', checkAPIKey, helper.getAll);
     app.post('/users', checkAPIKey, helper.signup);
     app.get('/users/:id', checkAPIKey, helper.getUser);
-    return app["delete"]('/users/:id', checkAPIKey, helper.deleteUser);
+    app["delete"]('/users/:id', checkAPIKey, helper.deleteUser);
+    return app.put('/users/:id', checkAPIKey, helper.linkUserWithAuth);
   };
 
 }).call(this);
 
-/*
 //# sourceMappingURL=../../target/config/routes.js.map
-*/
