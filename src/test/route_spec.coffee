@@ -1,9 +1,9 @@
 request = require 'supertest'
 expect = require 'expect.js'
 mongoose = require 'mongoose'
-app = require '../server.coffee'
+app = require '../server'
 dbURI = 'mongodb://127.0.0.1/app'
-user = require '../models/user.coffee'
+user = require '../models/user'
 clearDB = require('mocha-mongoose')(dbURI)
 expect = require 'expect.js'
 

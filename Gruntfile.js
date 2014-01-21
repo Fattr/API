@@ -48,10 +48,9 @@ module.exports = function(grunt) {
     mochaTest: {
       test: {
         options: {
-          reporter: 'spec',
-          require: 'coffee-script'
+          reporter: 'spec'
         },
-        src: ['src/test/**/*.coffee']
+        src: ['target/test/route_spec.js']
       }
     }
   });

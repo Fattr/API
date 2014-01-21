@@ -7,11 +7,11 @@
 
   mongoose = require('mongoose');
 
-  app = require('../server.coffee');
+  app = require('../server');
 
-  dbURI = 'mongodb://localhost/app';
+  dbURI = 'mongodb://127.0.0.1/app';
 
-  user = require('../models/user.coffee');
+  user = require('../models/user');
 
   clearDB = require('mocha-mongoose')(dbURI);
 
