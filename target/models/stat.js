@@ -15,7 +15,7 @@
     },
     date: {
       type: Date,
-      "default": Date.now
+      "default": Date.now()
     },
     fairlyActiveMinutes: Number,
     lightlyActiveMinutes: Number,
