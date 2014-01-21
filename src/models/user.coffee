@@ -23,8 +23,9 @@ UserSchema = new mongoose.Schema(
   authData:
     facebook:
       id: String
-      accesstoken: String
-      expiration_date: String
+      access_token: String
+      expiration_date: Date
+    
     twitter:
       id: String
       screen_name: String
