@@ -69,7 +69,7 @@ module.exports = function(grunt) {
   // use grunt command no options
 
   grunt.registerTask('build', ['coffeelint', 'coffee']);
-  grunt.registerTask('default', 'shell:server');
+  grunt.registerTask('default', ['watch']);
   grunt.registerTask('test', 'mochaTest:test');
   grunt.registerTask('travis', ['build', 'test']);
 
