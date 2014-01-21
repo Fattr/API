@@ -20,20 +20,24 @@ UserSchema = new mongoose.Schema(
     type: Date
     default: Date.now
 
-  facebook:
-    id: String
-    avatar: String
-    accesstoken: String
-    refreshToken: String
+  authData:
+    facebook:
+      id: String
+      access_token: String
+      expiration_date: Date
+    
+    twitter:
+      id: String
+      screen_name: String
+      auth_token: String
+      auth_token_secret: String
+      # TO-DO: FIGURE OUT IF WE NEED TO STORE BELOW ON USER
+      #consumer_key: your applications consumer key,
+      #consumer_secret: your applications consumer secret,
 
   services:[{
     type: mongoose.Schema.ObjectId
     ref: 'Service'
-  }]
-
-  following:[{
-    type: mongoose.Schema.ObjectId
-    ref: 'User'
   }]
 )
 

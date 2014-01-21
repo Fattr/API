@@ -28,6 +28,4 @@
 
 }).call(this);
 
-/*
-//# sourceMappingURL=../../src/compiled/auth.js.map
-*/
+//# sourceMappingURL=../../target/config/auth.js.map
