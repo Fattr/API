@@ -45,6 +45,7 @@ describe "Auth without API key", ->
       expect(err).to.be null
       do done
 
+
 describe 'Auth with API Key', ->
   beforeEach (done) ->
     return done() if mongoose.connection.db
@@ -62,7 +63,6 @@ describe 'Auth with API Key', ->
         expect(res.body).not.to.empty()
         expect(res.body).to.be.an 'object'
         do done
-
 
     it "Should return createdAt on signup", (done) ->
       request(app).post('/users',{email:'test@test.com',password:'test'})
