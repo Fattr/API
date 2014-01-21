@@ -8,6 +8,7 @@
   module.exports = function(app) {
     app.get('/', helper.index);
     app.post('/login', checkAPIKey, helper.login);
+    app.post('/logout', checkAPIKey, helper.logout);
     app.get('/users', checkAPIKey, helper.getAll);
     app.post('/users', checkAPIKey, helper.signup);
     app.get('/users/:id', checkAPIKey, helper.getUser);
