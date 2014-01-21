@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "grunt travis --verbose",
-    "postinstall": "grunt build"
+    "postinstall": "./node_modules/grunt-cli/bin/grunt build"
   },
   "engines": {
     "node": "0.10.x"
@@ -27,7 +27,8 @@
     "grunt": "~0.4.2",
     "bcrypt-nodejs": "0.0.3",
     "node-uuid": "~1.4.1",
-    "coffee-script": "~1.6.3"
+    "coffee-script": "~1.6.3",
+    "grunt-cli": "~0.1.11"
   },
   "devDependencies": {
     "grunt-coffeelint": "0.0.8",

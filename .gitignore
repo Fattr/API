@@ -11,7 +11,7 @@ lib-cov
 pids
 logs
 results
-
+target
 npm-debug.log
 node_modules
 .DS_Store
