@@ -1,7 +1,7 @@
 (function() {
   var app;
 
-  app = require('./server.coffee');
+  app = require('./server');
 
   app.listen(app.get('port'));
 
