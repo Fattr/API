@@ -10,7 +10,7 @@
       "default": Date.now()
     },
     _userId: {
-      type: mongoose.Schema.objectId,
+      type: mongoose.Schema.ObjectId,
       ref: 'User',
       unique: true
     },

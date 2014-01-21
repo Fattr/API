@@ -7,7 +7,7 @@ SessionSchema = new mongoose.Schema(
     default: Date.now()
 
   _userId:
-    type: mongoose.Schema.objectId
+    type: mongoose.Schema.ObjectId
     ref: 'User'
     unique: true # so one user cannot have more than one session
 
