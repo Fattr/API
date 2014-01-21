@@ -7,6 +7,6 @@ module.exports =
                 'Content-Type, Apikey, Authorization, Content-Length,
                 X-Requested-With'
 
-                # no === in coffeeScript
+
                 # this is for CORS preflight checks
-    if req.method == 'OPTIONS' then res.send 200 else next()
+    if req.method is 'OPTIONS' then res.send 200 else next()
