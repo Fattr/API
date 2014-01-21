@@ -1,6 +1,7 @@
 # routes for API and DB endpoints
 helper = require './routeHelpers'
 checkAPIKey = require('./apiConfig')['checkApiKey']
+checkSessionToken = require('./apiConfig')['checkSessionToken']
 
 module.exports = (app) ->
   app.get '/', helper.index
@@ -11,6 +12,6 @@ module.exports = (app) ->
   app.get '/users', checkAPIKey, helper.getAll
   app.post '/users', checkAPIKey, helper.signup
 
-  app.get '/users/:id', checkAPIKey, helper.getUser
+  app.get '/users/:id', checkAPIKey, checkSessionToken, helper.getUser
   app.delete '/users/:id', checkAPIKey, helper.deleteUser
   app.put '/users/:id', checkAPIKey, helper.linkUserWithAuth
