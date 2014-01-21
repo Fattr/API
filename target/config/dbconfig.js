@@ -5,4 +5,6 @@
 
 }).call(this);
 
-//# sourceMappingURL=../../target/config/dbconfig.js.map
+/*
+//# sourceMappingURL=../../target/dbconfig.js.map
+*/

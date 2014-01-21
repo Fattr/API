@@ -29,4 +29,6 @@
 
 }).call(this);
 
-//# sourceMappingURL=../../target/models/stat.js.map
+/*
+//# sourceMappingURL=../../target/stat.js.map
+*/
