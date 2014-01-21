@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "api_spec.js",
+  "sourceRoot": "../../src/test/",
+  "sources": [
+    "api_spec.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;CAAA,KAAA,KAAA;;CAAA,CAAA,CAAS,GAAT,CAAS,CAAA;;CAAT,CAEA,CAAA,oBAFA;;CAAA,CAKA,CAAA,GAAM,MAAN,GAAA,EAAA;CACE,CAAM,EAAN,EAAA;CACD,GAFD,MAAA;CAGE,CAAM,EAAN,SAAA;CACD,GAJD;;CALA,CAWA,CAAA,CAAA,EAAM,CAAN,IAAA,CAAA;CAXA"
+}

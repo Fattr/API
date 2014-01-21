@@ -21,7 +21,4 @@ app.use express.methodOverride()
 # routes for api and DB endpoints
 require('./config/routes')(app)
 
-# use app.get to get port rather than hardcoded value.
-app.listen app.get 'port'
-
-console.log "I hears ya on #{app.get 'port'} breh!"
+module.exports = app

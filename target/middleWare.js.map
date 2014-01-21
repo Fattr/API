@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "middleWare.js",
+  "sourceRoot": "../../src/config/",
+  "sources": [
+    "middleWare.coffee"
+  ],
+  "names": [],
+  "mappings": "AAAA;CAAA,CAAA,CACE,GADI,CAAN;CACE,CAAS,CAAA,CAAT,GAAA,EAAU;CACR,CAA0C,CAAvC,GAAH,uBAAA;CAAA,CAEY,CADT,GAAH,wBAAA,GAAA;CADA,CAIY,CADT,GAAH,wBAAA;CAHA,iCAGA;CAMA,EAAM,CAAH,CAAc,CAAjB,GAAA;CAAoC,EAAD,CAAH,WAAA;MAAhC,EAAA;CAAkD,GAAA,WAAA;QAV3C;CAAT,IAAS;CADX,GAAA;CAAA"
+}

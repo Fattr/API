@@ -25,9 +25,7 @@
 
   require('./config/routes')(app);
 
-  app.listen(app.get('port'));
-
-  console.log("I hears ya on " + (app.get('port')) + " breh!");
+  module.exports = app;
 
 }).call(this);
 
