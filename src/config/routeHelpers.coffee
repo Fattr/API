@@ -98,7 +98,7 @@ module.exports =
 
   logout: (req, res) ->
     user_id = req._userid
-    Session.findOne('userId': user_id, (err, session) ->
+    Session.findOne('_userId': user_id, (err, session) ->
       if err
         console.log 'err finding session to log out', err
         res.send 500
@@ -133,10 +133,9 @@ module.exports =
     )
 
   deleteUser: (req, res) ->
-    email = req.body.email
-    password = req.body.password
     id = req.params.id
-    User.findOne({'_id':id, 'email':email}, (err, user) ->
+    res.send 401 if id isnt req._userid # can only delete logged in user's info
+    User.findOne({'_id':id}, (err, user) ->
       if err
         console.error 'User.findOne error', err
         res.send 500
@@ -144,19 +143,26 @@ module.exports =
         # user is not in DB anyways..
         res.send 204
       else
-        bcrypt.compare password, user.password, (err, same) ->
+        token = req.headers["fittr-session-token"]
+        Session.findOne({'_access_token': token}, (err, session) ->
           if err
-            console.error 'bcrypt.compare error ', err
+            console.log 'err finding session', err
             res.send 500
-          else if not same
-            # password is incorrect
+          if not session
+            # session is not in the session DB
+            console.log "found no session"
             res.send 401
-          else
-            user.remove (err, user) ->
+          else # no errors and session is valid
+            session.remove (err, session) -> # remove session (log out)
               if err
-                console.error 'user.remove error ', err
+                console.error 'session.remove error ', err
                 res.send 500
-              res.json 204, user
+              user.remove (err, user) -> # remove user record
+                if err
+                  console.error 'user.remove error ', err
+                  res.send 500
+                res.send 204, user
+        )
     )
 
   linkUserWithAuth: (req, res) ->
