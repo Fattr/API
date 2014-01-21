@@ -6,12 +6,15 @@ BodySchema = new mongoose.Schema(
   user:
     type: Schema.ObjectId
     ref: 'User'
+
   collectedFrom:
     type: Schema.ObjectId
     ref: 'Service'
+
   date:
     type: Date
     default: Date.now
+
   bicep: Number
   bmi: Number
   calf: Number
