@@ -10,7 +10,6 @@ fitbit  = require('fitbit-js')('6b8b28e0569a422e97a70b5ca671df32',
                               'b351c1fea45d48ed9955a518f4e30e72',
                       'http://127.0.0.1:3000/fitbit')
 
-
 module.exports =
 
   # TO-DO: DECIDE WHAT INDEX ROUTE SHOULD RETURN
@@ -226,10 +225,30 @@ module.exports =
     )
 
   fitbitTokens: (req, res) ->
-    token = null
     fitbit.getAccessToken(req, res, (err, newToken) ->
+      if err
+        console.error 'fitbit.getAccessToken error', err
+        res.send 500
       console.log 'newToken', newToken
-      res.send 200
+      User.findOne({'_id':req._userid}, (err, user) ->
+        if err
+          console.error 'User.findOne error', err
+          res.send 500
+        if not user
+          # user is not in DB
+          res.send 204
+        else
+          user.set "authData.fitbit.access_token",
+            newToken.oauth_token
+          user.set "authData.fitbit.access_token_secret",
+            newToken.oauth_token_secret
+          user.save (err) ->
+            if err
+              console.error 'err', err
+              res.send 500
+            res.setHeader "location", "#{apiUrl}/users/#{user._id}"
+            res.json user
+      )
     )
 
 

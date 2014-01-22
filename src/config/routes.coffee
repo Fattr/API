@@ -18,7 +18,7 @@ module.exports = (app) ->
   app.put '/users/:id', checkAPIKey, checkSessionToken, helper.linkUserWithAuth
 
 
-  app.get '/fitbit', helper.fitbitTokens
+  app.get '/fitbit', checkSessionToken, helper.fitbitTokens
   app.get '/auth/fitbit/callback', helper.fitbitCallback
 
 
