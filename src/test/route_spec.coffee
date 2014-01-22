@@ -15,8 +15,6 @@ describe "Auth without API key", ->
   it "Should get hello world", (done) ->
     request(app).get('/').expect(200).end (err, res) ->
       expect(err).to.eql null
-      expect(res.body).to.have.property 'test'
-      expect(res.body.test).to.be.a 'string'
       do done
 
   it "Should not be able to POST /login without api key", (done) ->
