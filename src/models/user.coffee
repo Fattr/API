@@ -23,7 +23,6 @@ UserSchema = new mongoose.Schema(
   authData:
 
     fitbit:
-      id: String
       access_token: String
       access_token_secret: String
 
