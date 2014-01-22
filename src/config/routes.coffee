@@ -5,6 +5,7 @@ checkSessionToken = require('./apiConfig')['checkSessionToken']
 
 module.exports = (app) ->
   app.get '/', helper.index
+  app.get '/test/data', helper.testData
 
   app.post '/login', checkAPIKey, helper.login
   app.post '/logout', checkAPIKey, helper.logout

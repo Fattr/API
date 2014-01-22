@@ -15,7 +15,29 @@ module.exports =
 
   # TO-DO: DECIDE WHAT INDEX ROUTE SHOULD RETURN
   index: (req, res) ->
-    res.json 'test': 'hello world'
+    res.send 200
+
+  testData: (req, res) ->
+    data = []
+    users = [
+      'fred'
+      'scott'
+      'david'
+      'tony'
+      'santiago'
+      'mehul'
+      'wayne'
+      'douche'
+    ]
+    user = 0
+    while user < users.length
+      mock =
+        username: users[user]
+        date: new Date Date.now()
+        steps: Math.floor Math.random() * (16000 - 2200 + 1) + 2200
+      data.push mock
+      user++
+    res.json data
 
   signup: (req, res) ->
     email = req.body.email
@@ -214,3 +236,4 @@ module.exports =
   fitbitCallback: (req, res) ->
     console.log 'got them tokens'
     res.send 200
+
