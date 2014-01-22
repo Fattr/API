@@ -16,6 +16,7 @@ app.use express.logger('dev')
 
 app.use cors.headers
 app.use express.bodyParser()
+app.use express.cookieParser()
 app.use express.methodOverride()
 
 # routes for api and DB endpoints
