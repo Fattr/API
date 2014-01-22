@@ -8,7 +8,7 @@ bcrypt  = require 'bcrypt-nodejs'
 uuid    = require 'node-uuid'
 fitbit  = require('fitbit-js')('6b8b28e0569a422e97a70b5ca671df32',
                               'b351c1fea45d48ed9955a518f4e30e72',
-                      'http://127.0.0.1:5000/auth/fitbit/callback')
+                      'http://127.0.0.1:5000/fitbit')
 
 
 module.exports =
@@ -204,12 +204,13 @@ module.exports =
     )
 
   fitbitTokens: (req, res) ->
+    token = null
     fitbit.getAccessToken(req, res, (err, newToken) ->
-      if newToken
-        console.log 'new token', token
-        res.send 200
+      console.log 'newToken', newToken
+      res.send 200
     )
+
 
   fitbitCallback: (req, res) ->
     console.log 'got them tokens'
-    res.send req.params
+    res.send 200

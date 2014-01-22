@@ -4,8 +4,9 @@ module.exports =
     res.header 'Access-Control-Allow-Methods',
                 'GET, POST, PUT, DELETE, OPTIONS'
     res.header 'Access-Control-Allow-Headers',
-                'Content-Type, fittr-api-key, Authorization, Content-Length,
-                X-Requested-With'
+                'Content-Type, fittr-api-key,
+                fittr-session-token, Authorization,
+                Content-Length, X-Requested-With'
 
 
                 # this is for CORS preflight checks
